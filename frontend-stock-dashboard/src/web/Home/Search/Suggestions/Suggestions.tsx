@@ -26,7 +26,7 @@ const SuggestionsList = ({
       ) : React.isValidElement(EmptyComponent) ? (
         <EmptyComponent />
       ) : (
-        <div>Stock Not Found!</div>
+        <div>Stock Not Found! 😿</div>
       )}
     </>
   );

@@ -53,6 +53,10 @@ const Search = () => {
     }
   };
 
+  const handleSelectedItem = () => {
+    
+  }
+
   return (
     <Container>
       <FlexContainer alignItems="center">
@@ -68,7 +72,7 @@ const Search = () => {
           Search
         </Button>
       </FlexContainer>
-      <SuggestionList />
+      <SuggestionList response={state} onSuggestionClickCb={handleSelectedItem} />
     </Container>
   );
 };
