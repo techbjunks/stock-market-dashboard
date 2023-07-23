@@ -1,11 +1,7 @@
-import Home from './Home';
+import Home from "./Home";
 
-const App = ():JSX.Element => {
-  return (
-    <>
-      <Home />
-    </>
-  )
-}
+const App = (): JSX.Element => {
+  return <Home />;
+};
 
 export default App;

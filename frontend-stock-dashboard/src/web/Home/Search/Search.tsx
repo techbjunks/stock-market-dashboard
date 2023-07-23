@@ -1,10 +1,6 @@
 import { useState } from "react";
-import styled from 'styled-components';
+import { Container, InputStyle } from "./styled";
 import TextInput from "../../../common/components/Input/TextInput/TextInput";
-
-const Container = styled.div`
-  height: 100px;
-`;
 
 const Search = () => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -13,6 +9,7 @@ const Search = () => {
     <Container>
       <TextInput
         autoFocus
+        style={InputStyle}
         value={searchQuery}
         onChange={(e) => setSearchQuery(e.target.value)}
       />

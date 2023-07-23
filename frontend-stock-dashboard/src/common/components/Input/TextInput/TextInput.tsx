@@ -10,6 +10,7 @@ const TextInput = ({
   prefix,
   onChange,
   onSubmit,
+  style,
   autoFocus,
   placeholder,
   labelPosition,
@@ -36,6 +37,7 @@ const TextInput = ({
           name={name}
           type={type}
           value={value}
+          style={style}
           onBlur={onBlur}
           onFocus={onFocus}
           onKeyUp={handleKeyUp}
@@ -45,7 +47,9 @@ const TextInput = ({
         />
         {suffix && <span>{suffix}</span>}
       </div>
-      {label && labelPosition === LABEL_POSITION.BOTTOM && <label>{label}</label>}
+      {label && labelPosition === LABEL_POSITION.BOTTOM && (
+        <label>{label}</label>
+      )}
       {validationMessage && <label>{validationMessage}</label>}
     </>
   );

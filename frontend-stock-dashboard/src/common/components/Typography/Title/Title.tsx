@@ -4,6 +4,7 @@ import { BaseStyleTitleProps } from "./types";
 const Title = ({
   as,
   color,
+  size,
   weight,
   children,
   textAlign,
@@ -13,6 +14,7 @@ const Title = ({
   return (
     <BaseStyleTitle
       as={as}
+      size={size}
       color={color}
       weight={weight}
       textAlign={textAlign}
