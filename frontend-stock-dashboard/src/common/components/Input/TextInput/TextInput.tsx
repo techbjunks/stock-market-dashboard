@@ -1,4 +1,3 @@
-import{ ChangeEvent, KeyboardEvent } from 'react';
 import { TextInputProps, LABEL_POSITION } from './types';
 
 const TextInput = ({
@@ -18,11 +17,11 @@ const TextInput = ({
   validationMessage,
 }: TextInputProps): JSX.Element => {
 
-  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     onChange?.(event);
   };
 
-  const handleKeyUp = (event: KeyboardEvent<HTMLInputElement>) => {
+  const handleKeyUp = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.key === 'Enter' && onSubmit) {
       onSubmit(event);
     }

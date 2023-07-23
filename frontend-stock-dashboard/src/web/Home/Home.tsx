@@ -1,4 +1,3 @@
-import React from 'react';
 import Search from './Search';
 import Header from '../../common/ui/Header/Header';
 
