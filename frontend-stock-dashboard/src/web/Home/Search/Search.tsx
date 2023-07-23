@@ -1,9 +1,10 @@
 import { useState, useReducer, useEffect } from "react";
 import { useDebounce } from "../../../hooks";
-import { Container, InputStyle } from "./styled";
 import { getStockResults } from "../../../utils";
+import { Container, InputStyle } from "./styled";
 import Button from "../../../common/components/Button/Button";
 import { autocompleteReducer } from "../../../api/reducer/autocomplete";
+import { FlexContainer } from "../../../common/components/Box/Flex/styled";
 import TextInput from "../../../common/components/Input/TextInput/TextInput";
 import {AutocompleteState, AutocompleteActionTypes} from '../../../api/types/getStock';
 
@@ -53,7 +54,7 @@ const Search = () => {
 
   return (
     <Container>
-      <>
+      <FlexContainer>
         <TextInput
           autoFocus
           style={InputStyle}
@@ -64,7 +65,7 @@ const Search = () => {
         <Button type="submit" onClick={onSubmit}>
           Search
         </Button>
-      </>
+      </FlexContainer>
     </Container>
   );
 };
