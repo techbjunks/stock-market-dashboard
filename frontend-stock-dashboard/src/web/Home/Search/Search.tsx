@@ -21,6 +21,7 @@ const Search = () => {
   const isSearchQueryValid = searchQuery.length > 2;
   const debouncedSearchQuery = useDebounce(searchQuery, 1500);
   const [state, dispatch] = useReducer(autocompleteReducer, initialState);
+  
 
   useEffect(() => {
     const controller = new AbortController();
@@ -52,6 +53,18 @@ const Search = () => {
     setSearchQuery(e.target.value);
   };
 
+  const onSubmit = async () => {
+    try {
+      dispatch({ type: AutocompleteActionTypes.FETCH_START });
+      const response = await fetch(getStockResults(debouncedSearchQuery));
+      const data = await response.json();
+      dispatch({ type: AutocompleteActionTypes.FETCH_SUCCESS, payload: data });
+    } catch (error) {
+      dispatch({ type: AutocompleteActionTypes.FETCH_ERROR, payload: error });
+    }
+  }
+
+  
   return (
     <Container>
       <>
@@ -59,9 +72,10 @@ const Search = () => {
           autoFocus
           style={InputStyle}
           value={searchQuery}
+          onSubmit={onSubmit}
           onChange={handleChange}
         />
-        <Button type="submit" onClick={handleChange}>
+        <Button type="submit" onClick={onSubmit}>
           Search
         </Button>
       </>
