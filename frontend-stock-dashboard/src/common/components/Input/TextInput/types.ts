@@ -18,6 +18,6 @@ export interface TextInputProps {
     style?: React.CSSProperties | undefined;
     labelPosition?: LABEL_POSITION.TOP | LABEL_POSITION.BOTTOM,
     onSubmit?: (e:   React.KeyboardEvent<HTMLInputElement>) => void,
-    onChange: (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => void,
+    onChange: (e: React.ChangeEvent<HTMLInputElement>) => void,
 } 
  

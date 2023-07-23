@@ -5,7 +5,7 @@ import {
   AutocompleteActionTypes,
 } from "../api/reducer/autocomplete";
 
-const useAutocomplete = (apiEndpoint: string, searchQuery: string): AutocompleteState => {
+const useAutocomplete = (endpoint:string): AutocompleteState => {
   const initialState: AutocompleteState = {
     loading: false,
     suggestions: [],
@@ -18,10 +18,10 @@ const useAutocomplete = (apiEndpoint: string, searchQuery: string): Autocomplete
     const controller = new AbortController();
     const { signal } = controller;
 
-    const fetchSuggestions = async (inputValue: string) => {
+    const fetchSuggestions = async () => {
       try {
         dispatch({ type: AutocompleteActionTypes.FETCH_START });
-        const response = await fetch(`${apiEndpoint}?query=${inputValue}`, {
+        const response = await fetch(endpoint, {
           signal,
         });
         const data = await response.json();
@@ -33,11 +33,11 @@ const useAutocomplete = (apiEndpoint: string, searchQuery: string): Autocomplete
       }
     };
 
-    fetchSuggestions(searchQuery);
+    fetchSuggestions();
     return () => {
       controller.abort();
     };
-  }, [apiEndpoint, searchQuery]);
+  }, [endpoint]);
 
   return state;
 };
