@@ -15,6 +15,7 @@ export interface TextInputProps {
     placeholder?: string,
     validationMessage?: string,
     onFocus?: () => React.FocusEvent,
+    containerStyle?: React.CSSProperties | undefined;
     style?: React.CSSProperties | undefined;
     labelPosition?: LABEL_POSITION.TOP | LABEL_POSITION.BOTTOM,
     onSubmit?: (e:   React.KeyboardEvent<HTMLInputElement>) => void,

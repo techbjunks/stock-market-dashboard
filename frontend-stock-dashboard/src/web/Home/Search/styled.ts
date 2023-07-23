@@ -6,11 +6,17 @@ export const Container = styled.div`
 `;
 
 export const InputStyle = {
-  width: '80%',
+  width: '98%',
   height: '40px',
   fontSize: '20px',
   color: '#425074',
+  cursor: 'pointer',
   paddingLeft: '20px',
-  borderRadius: '20px',
+  borderRadius: '20px 0 0 20px',
   border: 'transparent',
+}
+
+export const InputWrapper = {
+  width: '70%',
+  marginRight: '2px',
 }

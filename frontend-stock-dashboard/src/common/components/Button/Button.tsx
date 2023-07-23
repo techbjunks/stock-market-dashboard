@@ -2,10 +2,10 @@ import { StyledButton } from "./styled";
 import { ButtonProps } from "./types";
 
 const Button = ({
-  children,
-  onClick,
-  ariaLabel,
   type,
+  onClick,
+  children,
+  ariaLabel,
 }: ButtonProps): JSX.Element => {
   return (
     <StyledButton aria-label={ariaLabel} type={type} onClick={onClick}>

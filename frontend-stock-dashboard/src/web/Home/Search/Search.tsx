@@ -1,8 +1,8 @@
 import { useState, useReducer, useEffect } from "react";
 import { useDebounce } from "../../../hooks";
 import { getStockResults } from "../../../utils";
-import { Container, InputStyle } from "./styled";
 import Button from "../../../common/components/Button/Button";
+import { Container, InputStyle, InputWrapper } from "./styled";
 import { autocompleteReducer } from "../../../api/reducer/autocomplete";
 import { FlexContainer } from "../../../common/components/Box/Flex/styled";
 import TextInput from "../../../common/components/Input/TextInput/TextInput";
@@ -54,13 +54,14 @@ const Search = () => {
 
   return (
     <Container>
-      <FlexContainer>
+      <FlexContainer alignItems="center">
         <TextInput
           autoFocus
           style={InputStyle}
           value={searchQuery}
           onSubmit={onSubmit}
           onChange={handleChange}
+          containerStyle={InputWrapper}
         />
         <Button type="submit" onClick={onSubmit}>
           Search

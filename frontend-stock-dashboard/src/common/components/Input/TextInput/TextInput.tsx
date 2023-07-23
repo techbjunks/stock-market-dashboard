@@ -4,16 +4,17 @@ const TextInput = ({
   label,
   name,
   value,
+  style,
   onBlur,
   suffix,
   onFocus,
   prefix,
   onChange,
   onSubmit,
-  style,
   autoFocus,
   placeholder,
   labelPosition,
+  containerStyle,
   type = 'text',
   validationMessage,
 }: TextInputProps): JSX.Element => {
@@ -31,7 +32,7 @@ const TextInput = ({
   return (
     <>
       {label && labelPosition === LABEL_POSITION.TOP && <label>{label}</label>}
-      <div>
+      <div style={containerStyle}>
         {prefix && <span>{prefix}</span>}
         <input
           name={name}
