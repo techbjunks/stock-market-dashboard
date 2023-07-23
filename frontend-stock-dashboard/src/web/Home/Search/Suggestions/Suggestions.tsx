@@ -12,7 +12,7 @@ const SuggestionsList = ({
   const onStockClick = (stock: string) => {
     onSuggestionClickCb?.(stock);
   };
-
+  
   return (
     <>
       {suggestions.length ? (

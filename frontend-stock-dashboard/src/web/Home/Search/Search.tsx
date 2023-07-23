@@ -1,4 +1,5 @@
 import { useState, useReducer, useEffect } from "react";
+import SuggestionList from './Suggestions';
 import { useDebounce } from "../../../hooks";
 import { getStockResults } from "../../../utils";
 import Button from "../../../common/components/Button/Button";
@@ -67,6 +68,7 @@ const Search = () => {
           Search
         </Button>
       </FlexContainer>
+      <SuggestionList />
     </Container>
   );
 };
