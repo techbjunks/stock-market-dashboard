@@ -22,49 +22,38 @@ const Search = () => {
   const debouncedSearchQuery = useDebounce(searchQuery, 1500);
   const [state, dispatch] = useReducer(autocompleteReducer, initialState);
   
-
-  useEffect(() => {
-    const controller = new AbortController();
-    const { signal } = controller;
-    const fetchSuggestions = async() => {
-      try {
-        dispatch({ type: AutocompleteActionTypes.FETCH_START });
-        const response = await fetch(getStockResults(debouncedSearchQuery), {
-          signal,
-        });
-        const data = await response.json();
-        dispatch({ type: AutocompleteActionTypes.FETCH_SUCCESS, payload: data });
-      } catch (error) {
-        if (!signal.aborted) {
-          dispatch({ type: AutocompleteActionTypes.FETCH_ERROR, payload: error });
-        }
-      }
-    }
-    if (isSearchQueryValid) {
-      fetchSuggestions();
-    }
-    return () => {
-      controller.abort();
-    };
-  }, [debouncedSearchQuery, isSearchQueryValid]);
-
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
-    setSearchQuery(e.target.value);
-  };
-
-  const onSubmit = async () => {
+  const fetchSuggestions = async (query: unknown) => {
     try {
       dispatch({ type: AutocompleteActionTypes.FETCH_START });
-      const response = await fetch(getStockResults(debouncedSearchQuery));
+      const response = await fetch(getStockResults(query));
       const data = await response.json();
       dispatch({ type: AutocompleteActionTypes.FETCH_SUCCESS, payload: data });
     } catch (error) {
       dispatch({ type: AutocompleteActionTypes.FETCH_ERROR, payload: error });
     }
-  }
+  };
 
-  
+  useEffect(() => {
+    if (isSearchQueryValid) {
+      fetchSuggestions(debouncedSearchQuery);
+    }
+
+    return () => {
+      const controller = new AbortController();
+      controller.abort();
+    };
+  }, [debouncedSearchQuery, isSearchQueryValid]);
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
+    setSearchQuery(e.target.value);
+  };
+
+  const onSubmit = () => {
+    if (isSearchQueryValid) {
+      fetchSuggestions(debouncedSearchQuery);
+    }
+  };
+
   return (
     <Container>
       <>
