@@ -1,4 +1,3 @@
-import useDebounce from './useDebounce';
-import useAutocomplete from './useAutoComplete';
+import useDebounce from "./useDebounce";
 
-export {useDebounce, useAutocomplete};
+export { useDebounce };

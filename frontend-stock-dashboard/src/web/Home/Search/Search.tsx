@@ -1,14 +1,11 @@
 import { useState, useReducer, useEffect } from "react";
-import { Container, InputStyle } from "./styled";
 import { useDebounce } from "../../../hooks";
-import {
-  AutocompleteState,
-  autocompleteReducer,
-  AutocompleteActionTypes,
-} from "../../../api/reducer/autocomplete";
+import { Container, InputStyle } from "./styled";
 import { getStockResults } from "../../../utils";
 import Button from "../../../common/components/Button/Button";
+import { autocompleteReducer } from "../../../api/reducer/autocomplete";
 import TextInput from "../../../common/components/Input/TextInput/TextInput";
+import {AutocompleteState, AutocompleteActionTypes} from '../../../api/types/getStock';
 
 const initialState: AutocompleteState = {
   loading: false,
@@ -21,7 +18,7 @@ const Search = () => {
   const isSearchQueryValid = searchQuery.length > 2;
   const debouncedSearchQuery = useDebounce(searchQuery, 1500);
   const [state, dispatch] = useReducer(autocompleteReducer, initialState);
-  
+
   const fetchSuggestions = async (query: unknown) => {
     try {
       dispatch({ type: AutocompleteActionTypes.FETCH_START });
