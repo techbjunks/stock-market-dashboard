@@ -1,7 +1,9 @@
-import { useState, useReducer, useEffect } from "react";
+import { useState, useReducer, useEffect, useRef } from "react";
+import {isStockValid} from './constant';
 import SuggestionList from './Suggestions';
 import { useDebounce } from "../../../hooks";
 import { getStockResults } from "../../../utils";
+import useClickOutside from "../../../hooks/useClickOutside";
 import Button from "../../../common/components/Button/Button";
 import { Container, InputStyle, InputWrapper } from "./styled";
 import { autocompleteReducer } from "../../../api/reducer/autocomplete";
@@ -16,12 +18,16 @@ const initialState: AutocompleteState = {
 };
 
 const Search = () => {
+  const ref = useRef(null);
   const [searchQuery, setSearchQuery] = useState("");
-  const isSearchQueryValid = searchQuery.length > 2;
+  const isSearchQueryValid = searchQuery.length > isStockValid;
   const debouncedSearchQuery = useDebounce(searchQuery, 1500);
+  const [isAutocompleteOpen, setAutocompleteOpen] = useState(false);
   const [state, dispatch] = useReducer(autocompleteReducer, initialState);
+  const isSuggestionVisible = isAutocompleteOpen && searchQuery.length > isStockValid;
 
   const fetchSuggestions = async (query: unknown) => {
+    setAutocompleteOpen(true);
     try {
       dispatch({ type: AutocompleteActionTypes.FETCH_START });
       const response = await fetch(getStockResults(query));
@@ -53,12 +59,18 @@ const Search = () => {
     }
   };
 
+  const handleOutsideClick = () => {
+    setAutocompleteOpen(false);
+  };
+
   const handleSelectedItem = () => {
-    
+    setAutocompleteOpen(false);
   }
 
+  useClickOutside(ref, handleOutsideClick);
+
   return (
-    <Container>
+    <Container ref={ref}>
       <FlexContainer alignItems="center">
         <TextInput
           autoFocus
@@ -72,7 +84,13 @@ const Search = () => {
           Search
         </Button>
       </FlexContainer>
-      <SuggestionList response={state} onSuggestionClickCb={handleSelectedItem} />
+      {isSuggestionVisible &&
+        <SuggestionList
+          response={state}
+          onSuggestionClickCb={handleSelectedItem}
+          EmptyComponent={() => <div>{searchQuery.toUpperCase()} Stock Not Found! 😿</div>}
+        />
+      }
     </Container>
   );
 };

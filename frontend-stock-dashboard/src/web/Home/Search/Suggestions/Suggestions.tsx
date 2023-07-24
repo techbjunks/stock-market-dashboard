@@ -1,6 +1,9 @@
-import React from "react";
 import { SuggestionProps } from "./types";
-import { AutocompleteList, AutocompleteListItem } from "./styled";
+import {
+  AutocompleteList,
+  AutocompleteListItem,
+  AutocompleteListItemSkeleton,
+} from "./styled";
 
 const SuggestionsList = ({
   response,
@@ -8,25 +11,35 @@ const SuggestionsList = ({
   onSuggestionClickCb,
 }: SuggestionProps): JSX.Element => {
   const suggestions = response.suggestions;
+  const isLoading = response.loading;
 
   const onStockClick = (stock: string) => {
     onSuggestionClickCb?.(stock);
   };
-  
+
   return (
     <>
-      {suggestions.length ? (
+      {isLoading ? (
+        <AutocompleteList>
+          {[...Array(5)].map((_, index) => (
+            <AutocompleteListItemSkeleton key={index} />
+          ))}
+        </AutocompleteList>
+      ) : suggestions.length ? (
         <AutocompleteList>
           {suggestions.map((symbol) => (
-            <AutocompleteListItem key={symbol.name} onClick={() => onStockClick(symbol.name)}>
+            <AutocompleteListItem
+              key={symbol.name}
+              onClick={() => onStockClick(symbol.name)}
+            >
               {symbol.name}
             </AutocompleteListItem>
           ))}
         </AutocompleteList>
-      ) : React.isValidElement(EmptyComponent) ? (
-        <EmptyComponent />
       ) : (
-        <div>Stock Not Found! 😿</div>
+        <AutocompleteList>
+         <AutocompleteListItem>{EmptyComponent ? <EmptyComponent /> : 'Stock Not Found! 😿'}</AutocompleteListItem>
+        </AutocompleteList>
       )}
     </>
   );

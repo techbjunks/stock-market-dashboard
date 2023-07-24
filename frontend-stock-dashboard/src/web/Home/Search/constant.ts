@@ -1,0 +1,1 @@
+export const isStockValid: number = 2;
