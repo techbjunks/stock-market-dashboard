@@ -20,25 +20,31 @@ const SuggestionsList = ({
   };
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLLIElement>) => {
-    const { key } = e;  
-    if (key === 'ArrowDown') {
+    const { key } = e;
+    if (key === "ArrowDown") {
       e.preventDefault();
-      setSelectedIndex((prevIndex:number) => (prevIndex < suggestions.length - 1 ? prevIndex + 1 : 0));
-    } else if (key === 'ArrowUp') {
+      setSelectedIndex((prevIndex: number) =>
+        prevIndex < suggestions.length - 1 ? prevIndex + 1 : 0
+      );
+    } else if (key === "ArrowUp") {
       e.preventDefault();
-      setSelectedIndex((prevIndex:number) => (prevIndex > 0 ? prevIndex - 1 : suggestions.length - 1));
-    } else if (key === 'Enter' && selectedIndex !== -1) {
+      setSelectedIndex((prevIndex: number) =>
+        prevIndex > 0 ? prevIndex - 1 : suggestions.length - 1
+      );
+    } else if (key === "Enter" && selectedIndex !== -1) {
       onStockClick(suggestions[selectedIndex]);
     }
   };
 
   useEffect(() => {
-    if(suggestions && selectedIndex !== -1){
-      const selectedItem = document.getElementById(suggestions[selectedIndex]["1. symbol"]);
+    if (suggestions && selectedIndex !== -1) {
+      const selectedItem = document.getElementById(
+        suggestions[selectedIndex]["1. symbol"]
+      );
       if (selectedItem) {
-        selectedItem.scrollIntoView({ block: 'nearest' });
+        selectedItem.scrollIntoView({ block: "nearest" });
       }
-    } 
+    }
   }, [suggestions, selectedIndex]);
 
   return (
@@ -60,7 +66,8 @@ const SuggestionsList = ({
                 onKeyDown={handleKeyDown}
                 onClick={() => onStockClick(stock)}
                 style={{
-                  backgroundColor: index === selectedIndex ? '#fce5cd' : 'transparent',
+                  backgroundColor:
+                    index === selectedIndex ? "#fce5cd" : "transparent",
                 }}
               >
                 {stock["2. name"]} ({stock["1. symbol"]}) , {stock["4. region"]}
@@ -69,13 +76,11 @@ const SuggestionsList = ({
           })}
         </AutocompleteList>
       ) : (
-        suggestions?.length === 0 && (
-          <AutocompleteList>
-            <AutocompleteListItem>
-              {EmptyComponent ? <EmptyComponent /> : "Stock Not Found! 😿"}
-            </AutocompleteListItem>
-          </AutocompleteList>
-        )
+        <AutocompleteList>
+          <AutocompleteListItem>
+            {EmptyComponent ? <EmptyComponent /> : "Stock Not Found! 😿"}
+          </AutocompleteListItem>
+        </AutocompleteList>
       )}
     </>
   );

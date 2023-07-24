@@ -25,7 +25,7 @@ const Search = () => {
 
   const isSearchQueryValid = searchQuery.length > isStockValid;
   const isSuggestionVisible =
-    isAutocompleteOpen && searchQuery.length > isStockValid;
+    isAutocompleteOpen && searchQuery.length > isStockValid && !isPending;
 
   useEffect(() => {
     return () => {
