@@ -15,3 +15,4 @@
 12. Components can be improved
     - In Button - variants , size such features can be added
 13. API dosent have a standard JSON response , we can create some interceptor to resolve it 
+14. There is a flicker in autocomplete - we can use autocomplete for this.

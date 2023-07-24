@@ -76,8 +76,12 @@ const Search = () => {
   };
 
   const handleSelectedItem = (stock: StockType) => {
-    setAutocompleteOpen(false);
-    console.log(stock);
+    console.log('stock', stock)
+    const stockName = stock['2. name'];
+    setSearchQuery(stockName);
+    setTimeout(() => {
+      setAutocompleteOpen(false);
+    }, 1200)
   };
 
   useClickOutside(ref, handleOutsideClick);

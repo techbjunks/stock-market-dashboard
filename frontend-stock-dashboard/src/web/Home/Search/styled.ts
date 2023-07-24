@@ -8,7 +8,7 @@ export const Container = styled.div`
 export const InputStyle = {
   width: '98%',
   height: '40px',
-  fontSize: '20px',
+  fontSize: '15px',
   color: '#425074',
   cursor: 'pointer',
   paddingLeft: '20px',

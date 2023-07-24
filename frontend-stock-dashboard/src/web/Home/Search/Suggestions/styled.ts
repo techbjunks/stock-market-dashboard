@@ -11,6 +11,10 @@ export const AutocompleteList = styled.ul`
   border: 1px solid #ddd;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+
+  @media screen and (max-width: 768px) {
+    width: 98%;
+  }
 `;
 
 export const AutocompleteListItem = styled.li`
