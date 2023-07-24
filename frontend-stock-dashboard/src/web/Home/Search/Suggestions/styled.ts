@@ -18,7 +18,8 @@ export const AutocompleteListItem = styled.li`
   font-size: 1rem;
   cursor: pointer;
 
-  &:hover {
+  &:hover,
+  &:focus {
     background-color: #fce5cd;
   }
 

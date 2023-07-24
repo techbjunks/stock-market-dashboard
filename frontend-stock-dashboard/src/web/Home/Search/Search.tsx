@@ -2,6 +2,7 @@ import { useState, useReducer, useEffect, useRef } from "react";
 import {isStockValid} from './constant';
 import SuggestionList from './Suggestions';
 import { useDebounce } from "../../../hooks";
+import { StockType } from "../../../common/types/stock";
 import { getStockResults } from "../../../utils";
 import useClickOutside from "../../../hooks/useClickOutside";
 import Button from "../../../common/components/Button/Button";
@@ -21,7 +22,7 @@ const Search = () => {
   const ref = useRef(null);
   const [searchQuery, setSearchQuery] = useState("");
   const isSearchQueryValid = searchQuery.length > isStockValid;
-  const debouncedSearchQuery: string = useDebounce(searchQuery, 1500);
+  const debouncedSearchQuery: unknown = useDebounce(searchQuery, 500);
   const [isAutocompleteOpen, setAutocompleteOpen] = useState(false);
   const [state, dispatch] = useReducer(autocompleteReducer, initialState);
   const isSuggestionVisible = isAutocompleteOpen && searchQuery.length > isStockValid;
@@ -30,10 +31,10 @@ const Search = () => {
     setAutocompleteOpen(true);
     try {
       dispatch({ type: AutocompleteActionTypes.FETCH_START });
-      // const response = await fetch(getStockResults(query));
-      const response = await fetch('https://run.mocky.io/v3/04619120-b4c2-4b5f-8f49-8f5b7fe81146');
+      const response = await fetch(getStockResults(query));
+      // const response = await fetch('https://run.mocky.io/v3/04619120-b4c2-4b5f-8f49-8f5b7fe81146'); // remove this hard code
       const data = await response.json();
-      dispatch({ type: AutocompleteActionTypes.FETCH_SUCCESS, payload: [] || data.bestMatches });
+      dispatch({ type: AutocompleteActionTypes.FETCH_SUCCESS, payload: data.bestMatches });
     } catch (error) {
       dispatch({ type: AutocompleteActionTypes.FETCH_ERROR, payload: error });
     }
@@ -64,8 +65,9 @@ const Search = () => {
     setAutocompleteOpen(false);
   };
 
-  const handleSelectedItem = () => {
+  const handleSelectedItem = (stock: StockType) => {
     setAutocompleteOpen(false);
+    console.log('stock value =', stock);
   }
 
   useClickOutside(ref, handleOutsideClick);
