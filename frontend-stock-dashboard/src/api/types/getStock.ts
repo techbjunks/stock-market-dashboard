@@ -1,3 +1,4 @@
+import { StockType } from "../../common/types/stock";
 export interface AutocompleteSuggestion {
     id: number;
     name: string;
@@ -6,7 +7,7 @@ export interface AutocompleteSuggestion {
   export interface AutocompleteState {
     loading: boolean;
     error: string | null;
-    suggestions: AutocompleteSuggestion[];
+    suggestions: StockType[];
   }
   
   export enum AutocompleteActionTypes {
@@ -19,6 +20,6 @@ export interface AutocompleteSuggestion {
     | { type: AutocompleteActionTypes.FETCH_START }
     | {
         type: AutocompleteActionTypes.FETCH_SUCCESS;
-        payload: AutocompleteSuggestion[];
+        payload: StockType[];
       }
     | { type: AutocompleteActionTypes.FETCH_ERROR; payload: string | null | unknown };

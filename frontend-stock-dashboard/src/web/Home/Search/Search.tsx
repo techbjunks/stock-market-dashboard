@@ -21,18 +21,19 @@ const Search = () => {
   const ref = useRef(null);
   const [searchQuery, setSearchQuery] = useState("");
   const isSearchQueryValid = searchQuery.length > isStockValid;
-  const debouncedSearchQuery = useDebounce(searchQuery, 1500);
+  const debouncedSearchQuery: string = useDebounce(searchQuery, 1500);
   const [isAutocompleteOpen, setAutocompleteOpen] = useState(false);
   const [state, dispatch] = useReducer(autocompleteReducer, initialState);
   const isSuggestionVisible = isAutocompleteOpen && searchQuery.length > isStockValid;
 
-  const fetchSuggestions = async (query: unknown) => {
+  const fetchSuggestions = async (query: string) => {
     setAutocompleteOpen(true);
     try {
       dispatch({ type: AutocompleteActionTypes.FETCH_START });
-      const response = await fetch(getStockResults(query));
+      // const response = await fetch(getStockResults(query));
+      const response = await fetch('https://run.mocky.io/v3/04619120-b4c2-4b5f-8f49-8f5b7fe81146');
       const data = await response.json();
-      dispatch({ type: AutocompleteActionTypes.FETCH_SUCCESS, payload: data });
+      dispatch({ type: AutocompleteActionTypes.FETCH_SUCCESS, payload: [] || data.bestMatches });
     } catch (error) {
       dispatch({ type: AutocompleteActionTypes.FETCH_ERROR, payload: error });
     }

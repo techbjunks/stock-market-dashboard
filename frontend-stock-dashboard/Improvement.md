@@ -14,3 +14,4 @@
 11. Mobile Responsiveness
 12. Components can be improved
     - In Button - variants , size such features can be added
+13. API dosent have a standard JSON response , we can create some interceptor to resolve it 

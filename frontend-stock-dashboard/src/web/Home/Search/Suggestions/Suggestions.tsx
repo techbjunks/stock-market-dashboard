@@ -1,4 +1,5 @@
-import { SuggestionProps } from "./types";
+import { StockType } from "../../../../common/types/stock";
+import { SuggestionPropsType } from "./types";
 import {
   AutocompleteList,
   AutocompleteListItem,
@@ -9,14 +10,13 @@ const SuggestionsList = ({
   response,
   EmptyComponent,
   onSuggestionClickCb,
-}: SuggestionProps): JSX.Element => {
-  const suggestions = response.suggestions;
+}: SuggestionPropsType): JSX.Element => {
+  const suggestions: StockType[] = response?.suggestions;
   const isLoading = response.loading;
 
-  const onStockClick = (stock: string) => {
+  const onStockClick = (stock: StockType) => {
     onSuggestionClickCb?.(stock);
   };
-
   return (
     <>
       {isLoading ? (
@@ -25,21 +25,27 @@ const SuggestionsList = ({
             <AutocompleteListItemSkeleton key={index} />
           ))}
         </AutocompleteList>
-      ) : suggestions.length ? (
+      ) : suggestions && suggestions.length ? (
         <AutocompleteList>
-          {suggestions.map((symbol) => (
-            <AutocompleteListItem
-              key={symbol.name}
-              onClick={() => onStockClick(symbol.name)}
-            >
-              {symbol.name}
-            </AutocompleteListItem>
-          ))}
+          {suggestions.map((stock) => {
+            return (
+              <AutocompleteListItem
+                key={stock["2. name"]}
+                onClick={() => onStockClick(stock)}
+              >
+                {stock["2. name"]} ({stock["1. symbol"]})
+              </AutocompleteListItem>
+            );
+          })}
         </AutocompleteList>
       ) : (
-        <AutocompleteList>
-         <AutocompleteListItem>{EmptyComponent ? <EmptyComponent /> : 'Stock Not Found! 😿'}</AutocompleteListItem>
-        </AutocompleteList>
+        suggestions.length === 0 && (
+          <AutocompleteList>
+            <AutocompleteListItem>
+              {EmptyComponent ? <EmptyComponent /> : "Stock Not Found! 😿"}
+            </AutocompleteListItem>
+          </AutocompleteList>
+        )
       )}
     </>
   );
