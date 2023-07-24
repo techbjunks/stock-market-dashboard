@@ -5,7 +5,7 @@ import {
   AutocompleteListItem,
   AutocompleteListItemSkeleton,
 } from "./styled";
-import { StockType } from "../../../../common/types/stock";
+import { StockType } from "../../../common/types/stock";
 
 const SuggestionsList = ({
   response,

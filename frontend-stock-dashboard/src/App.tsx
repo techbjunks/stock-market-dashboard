@@ -1,5 +1,5 @@
 import {  BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Home from './web/Home';
+import Home from './views/Home';
 import NotFound from './common/ui/NotFound';
 
 const Base = ():JSX.Element => {

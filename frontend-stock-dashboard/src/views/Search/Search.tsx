@@ -1,20 +1,20 @@
 import { useState, useReducer, useEffect, useRef } from "react";
 import { isStockValid } from "./constant";
 import SuggestionList from "./Suggestions";
-import { useDebounce } from "../../../hooks";
-import { getStockResults } from "../../../utils";
-import { StockType } from "../../../common/types/stock";
-import ErrorBoundary from "../../../common/ui/ErrorBoundary";
-import useClickOutside from "../../../hooks/useClickOutside";
-import Button from "../../../common/components/Button/Button";
+import { useDebounce } from "../../hooks";
+import { getStockResults } from "../../utils";
+import { StockType } from "../../common/types/stock";
+import ErrorBoundary from "../../common/ui/ErrorBoundary";
+import useClickOutside from "../../hooks/useClickOutside";
+import Button from "../../common/components/Button/Button";
 import { Container, InputStyle, InputWrapper } from "./styled";
-import { autocompleteReducer } from "../../../api/reducer/autocomplete";
-import { FlexContainer } from "../../../common/components/Box/Flex/styled";
-import TextInput from "../../../common/components/Input/TextInput/TextInput";
+import { autocompleteReducer } from "../../api/reducer/autocomplete";
+import { FlexContainer } from "../../common/components/Box/Flex/styled";
+import TextInput from "../../common/components/Input/TextInput/TextInput";
 import {
   AutocompleteState,
   AutocompleteActionTypes,
-} from "../../../api/types/getStock";
+} from "../../api/types/getStock";
 
 const initialState: AutocompleteState = {
   loading: false,
