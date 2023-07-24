@@ -5,7 +5,7 @@ import {
   AutocompleteListItem,
   AutocompleteListItemSkeleton,
 } from "./styled";
-import { StockType } from "../../../common/types/stock";
+import { Stock } from "../../../common/types/stock";
 
 const SuggestionsList = ({
   response,
@@ -13,9 +13,9 @@ const SuggestionsList = ({
   onSuggestionClickCb,
 }: SuggestionPropsType): JSX.Element => {
   const [selectedIndex, setSelectedIndex] = useState(-1);
-  const suggestions: StockType[] = response?.suggestions;
+  const suggestions: Stock[] = response?.suggestions;
   const isLoading = response.loading;
-  const onStockClick = (stock: StockType) => {
+  const onStockClick = (stock: Stock) => {
     onSuggestionClickCb?.(stock);
   };
 

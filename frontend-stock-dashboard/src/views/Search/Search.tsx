@@ -1,11 +1,11 @@
+import { useNavigate } from "react-router-dom";
 import { useState, useReducer, useEffect, useRef, useTransition } from "react";
-import { useNavigate } from 'react-router-dom';
 
-import { isStockValid } from "./constant";
-import SuggestionList from "./Suggestions";
 import { useDebounce } from "../../hooks";
-import { getStockResults } from "../../utils";
-import { StockType } from "../../common/types/stock";
+import SuggestionList from "./Suggestions";
+import { fetchSuggestions } from "../../api";
+import { Stock } from "../../common/types/stock";
+import { isStockValid, initialState } from "./constant";
 import ErrorBoundary from "../../common/ui/ErrorBoundary";
 import useClickOutside from "../../hooks/useClickOutside";
 import Button from "../../common/components/Button/Button";
@@ -13,16 +13,6 @@ import { Container, InputStyle, InputWrapper } from "./styled";
 import { autocompleteReducer } from "../../api/reducer/autocomplete";
 import { FlexContainer } from "../../common/components/Box/Flex/styled";
 import TextInput from "../../common/components/Input/TextInput/TextInput";
-import {
-  AutocompleteState,
-  AutocompleteActionTypes,
-} from "../../api/types/getStock";
-
-const initialState: AutocompleteState = {
-  loading: false,
-  suggestions: [],
-  error: null,
-};
 
 const Search = () => {
   const ref = useRef(null);
@@ -37,24 +27,6 @@ const Search = () => {
   const isSuggestionVisible =
     isAutocompleteOpen && searchQuery.length > isStockValid;
 
-  const fetchSuggestions = async (query: string) => {
-    setAutocompleteOpen(true);
-    try {
-      dispatch({ type: AutocompleteActionTypes.FETCH_START });
-      // const response = await fetch(getStockResults(query));
-      const response = await fetch(
-        "https://run.mocky.io/v3/04619120-b4c2-4b5f-8f49-8f5b7fe81146"
-      ); // remove this hard code before demo
-      const data = await response.json();
-      dispatch({
-        type: AutocompleteActionTypes.FETCH_SUCCESS,
-        payload: data.bestMatches,
-      });
-    } catch (error) {
-      dispatch({ type: AutocompleteActionTypes.FETCH_ERROR, payload: error });
-    }
-  };
-
   useEffect(() => {
     return () => {
       const controller = new AbortController();
@@ -62,29 +34,32 @@ const Search = () => {
     };
   }, []);
 
+  const valiateAndQueryResults = () => {
+    if (isSearchQueryValid) {
+      setAutocompleteOpen(true);
+      fetchSuggestions(debouncedSearchQuery, dispatch);
+    }
+  }
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
     setSearchQuery(e.target.value);
     startTransition(() => {
-      if (isSearchQueryValid) {
-        fetchSuggestions(debouncedSearchQuery);
-      }
+      valiateAndQueryResults();
     });
   };
 
   const onSubmit = () => {
-    if (isSearchQueryValid) {
-      fetchSuggestions(debouncedSearchQuery);
-    }
+    valiateAndQueryResults();
   };
 
   const handleOutsideClick = () => {
     setAutocompleteOpen(false);
   };
 
-  const handleSelectedItem = (stock: StockType) => {
-    const stockName = stock['2. name'];
+  const handleSelectedItem = (stock: Stock) => {
+    const stockName = stock["2. name"];
     setSearchQuery(stockName);
-    const stockSymbol = stock['1. symbol'];
+    const stockSymbol = stock["1. symbol"];
     navigate(`/stock/${stockSymbol}/details`);
     setAutocompleteOpen(false);
   };
@@ -108,7 +83,7 @@ const Search = () => {
           </Button>
         </FlexContainer>
 
-        {!isPending && isSuggestionVisible && (
+        {isSuggestionVisible && (
           <SuggestionList
             response={state}
             onSuggestionClickCb={handleSelectedItem}
