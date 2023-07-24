@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { SuggestionPropsType } from "./types";
 import {
   AutocompleteList,
@@ -22,7 +22,7 @@ const SuggestionsList = ({
   };
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLLIElement>) => {
-    const { key } = e;
+    const { key } = e;  
     if (key === 'ArrowDown') {
       e.preventDefault();
       setSelectedIndex((prevIndex:number) => (prevIndex < suggestions.length - 1 ? prevIndex + 1 : 0));
@@ -33,6 +33,15 @@ const SuggestionsList = ({
       onStockClick(suggestions[selectedIndex]);
     }
   };
+
+  useEffect(() => {
+    if(suggestions && selectedIndex !== -1){
+      const selectedItem = document.getElementById(suggestions[selectedIndex]["1. symbol"]);
+      if (selectedItem) {
+        selectedItem.scrollIntoView({ block: 'nearest' });
+      }
+    } 
+  }, [suggestions, selectedIndex]);
 
   return (
     <>
@@ -47,8 +56,9 @@ const SuggestionsList = ({
           {suggestions.map((stock, index) => {
             return (
               <AutocompleteListItem
-                key={stock["1. symbol"]}
                 tabIndex={0}
+                key={stock["1. symbol"]}
+                id={stock["1. symbol"]}
                 onKeyDown={handleKeyDown}
                 onClick={() => onStockClick(stock)}
                 style={{
