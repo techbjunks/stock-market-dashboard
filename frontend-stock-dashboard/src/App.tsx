@@ -1,5 +1,6 @@
 import {  BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Home from './views/Home';
+import Detail from './views/Details';
 import NotFound from './common/ui/NotFound';
 
 const Base = ():JSX.Element => {
@@ -8,6 +9,7 @@ const Base = ():JSX.Element => {
       <div>
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/stock/:symbol/details" element={<Detail />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </div>

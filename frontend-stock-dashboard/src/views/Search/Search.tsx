@@ -1,4 +1,6 @@
-import { useState, useReducer, useEffect, useRef } from "react";
+import { useState, useReducer, useEffect, useRef, useTransition } from "react";
+import { useNavigate } from 'react-router-dom';
+
 import { isStockValid } from "./constant";
 import SuggestionList from "./Suggestions";
 import { useDebounce } from "../../hooks";
@@ -24,11 +26,14 @@ const initialState: AutocompleteState = {
 
 const Search = () => {
   const ref = useRef(null);
+  const navigate = useNavigate();
   const [searchQuery, setSearchQuery] = useState("");
-  const isSearchQueryValid = searchQuery.length > isStockValid;
-  const debouncedSearchQuery: unknown = useDebounce(searchQuery, 500);
+  const [isPending, startTransition] = useTransition();
+  const debouncedSearchQuery: string = useDebounce(searchQuery, 1500);
   const [isAutocompleteOpen, setAutocompleteOpen] = useState(false);
   const [state, dispatch] = useReducer(autocompleteReducer, initialState);
+
+  const isSearchQueryValid = searchQuery.length > isStockValid;
   const isSuggestionVisible =
     isAutocompleteOpen && searchQuery.length > isStockValid;
 
@@ -51,18 +56,19 @@ const Search = () => {
   };
 
   useEffect(() => {
-    if (isSearchQueryValid) {
-      fetchSuggestions(debouncedSearchQuery);
-    }
-
     return () => {
       const controller = new AbortController();
       controller.abort();
     };
-  }, [debouncedSearchQuery, isSearchQueryValid]);
+  }, []);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
     setSearchQuery(e.target.value);
+    startTransition(() => {
+      if (isSearchQueryValid) {
+        fetchSuggestions(debouncedSearchQuery);
+      }
+    });
   };
 
   const onSubmit = () => {
@@ -76,12 +82,11 @@ const Search = () => {
   };
 
   const handleSelectedItem = (stock: StockType) => {
-    console.log('stock', stock)
     const stockName = stock['2. name'];
     setSearchQuery(stockName);
-    setTimeout(() => {
-      setAutocompleteOpen(false);
-    }, 1200)
+    const stockSymbol = stock['1. symbol'];
+    navigate(`/stock/${stockSymbol}/details`);
+    setAutocompleteOpen(false);
   };
 
   useClickOutside(ref, handleOutsideClick);
@@ -103,7 +108,7 @@ const Search = () => {
           </Button>
         </FlexContainer>
 
-        {isSuggestionVisible && (
+        {!isPending && isSuggestionVisible && (
           <SuggestionList
             response={state}
             onSuggestionClickCb={handleSelectedItem}
