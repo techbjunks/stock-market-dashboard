@@ -63,7 +63,7 @@ const SuggestionsList = ({
                   backgroundColor: index === selectedIndex ? '#fce5cd' : 'transparent',
                 }}
               >
-                {stock["2. name"]} ({stock["1. symbol"]})
+                {stock["2. name"]} ({stock["1. symbol"]}) , {stock["4. region"]}
               </AutocompleteListItem>
             );
           })}

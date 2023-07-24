@@ -39,7 +39,7 @@ const Search = () => {
       // const response = await fetch(getStockResults(query));
       const response = await fetch(
         "https://run.mocky.io/v3/04619120-b4c2-4b5f-8f49-8f5b7fe81146"
-      ); // remove this hard code
+      ); // remove this hard code before demo
       const data = await response.json();
       dispatch({
         type: AutocompleteActionTypes.FETCH_SUCCESS,
