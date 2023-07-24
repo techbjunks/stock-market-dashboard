@@ -28,7 +28,6 @@ const TextInput = ({
       onSubmit(event);
     }
   };
-
   return (
     <>
       {label && labelPosition === LABEL_POSITION.TOP && <label>{label}</label>}

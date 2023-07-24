@@ -12,11 +12,9 @@ const SuggestionsList = ({
   EmptyComponent,
   onSuggestionClickCb,
 }: SuggestionPropsType): JSX.Element => {
-
   const [selectedIndex, setSelectedIndex] = useState(-1);
   const suggestions: StockType[] = response?.suggestions;
   const isLoading = response.loading;
-
   const onStockClick = (stock: StockType) => {
     onSuggestionClickCb?.(stock);
   };
