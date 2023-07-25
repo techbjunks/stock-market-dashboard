@@ -4,6 +4,7 @@ import {
   StockDetailActionTypes,
 } from "../../types/stockdetails";
 
+
 const stockDetailsReducer = (
   state: StockDetailState,
   action: StockDetailAction

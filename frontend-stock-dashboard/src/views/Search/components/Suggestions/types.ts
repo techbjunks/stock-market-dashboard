@@ -1,5 +1,5 @@
-import { AutocompleteState } from "../../../api/types/autocomplete";
-import { Stock } from "../../../common/types/stock";
+import { AutocompleteState } from "../../../../api/types/autocomplete";
+import { Stock } from "../../../../common/types/stock";
 
 
 export type SuggestionPropsType = {

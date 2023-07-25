@@ -3,9 +3,10 @@ import {validAsValues} from './constant';
 export type TextProps = {
   as?: (typeof validAsValues)[number];
   children: React.ReactNode;
-  weight?: number;
+  weight?: string;
   color?: string;
   className?: string;
+  fontSize?: string;
   textAlign?: "left" | "right";
 };
 

@@ -1,0 +1,55 @@
+import theme from "../../../../theme";
+import { useMobile } from "../../../../hooks";
+import { getStockPrice } from "../../../../utils";
+import Title from "../../../../common/components/Title";
+import { StockTableProps, InfoItemType } from "./types";
+import Text from "../../../../common/components/Text/Text";
+import FlexBox from "../../../../common/components/Box/Flex/Flex";
+import { StockTableContainer, InfoContainer, RowItem } from "./styled";
+
+const InfoItem = ({ title, value, color }: InfoItemType): JSX.Element => (
+  <RowItem>
+    <Text fontSize={theme.typography.label.fontSize} weight="200" color={color}>
+      {title.length ? `${title} -` : null} {value}
+    </Text>
+  </RowItem>
+);
+
+const StockTable = ({ data }: StockTableProps): JSX.Element => {
+  const isMobile = useMobile(768);
+  return (
+    <StockTableContainer>
+      <FlexBox
+        gap={isMobile ? "8px" : "40px"}
+        flexDirection={isMobile ? "column" : "row"}
+      >
+        <InfoContainer>
+          <Title as="h4" size="medium" color="#2a2e39">
+            Latest Quote - {data.Name} ({data.Symbol}) {data.Country}
+          </Title>
+          <InfoItem title="" value={data.Description} color="#2a2e39" />
+          <InfoItem
+            title="Stock Price"
+            value={getStockPrice(data.EPS, data.PERatio, data.Currency)}
+            color="#5f12c7"
+          />
+          <InfoItem title="PE Ratio" value={data.PERatio} color="#5f12c7" />
+          <InfoItem title="Exchange" value={data.Exchange} color="#5f12c7" />
+          <InfoItem title="Industry" value={data.Industry} color="#5f12c7" />
+          <InfoItem
+            title="Market Cap"
+            color="#5f12c7"
+            value={`${data.MarketCapitalization} ${data.Currency}`}
+          />
+        </InfoContainer>
+        <InfoContainer>
+          <Title as="h4" size="medium" color="#2a2e39">
+            Chart
+          </Title>
+        </InfoContainer>
+      </FlexBox>
+    </StockTableContainer>
+  );
+};
+
+export default StockTable;

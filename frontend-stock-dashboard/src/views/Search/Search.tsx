@@ -2,15 +2,15 @@ import { useNavigate } from "react-router-dom";
 import { useState, useReducer, useEffect, useRef, useTransition } from "react";
 
 import { useDebounce } from "../../hooks";
-import SuggestionList from "./Suggestions";
 import { fetchSuggestions } from "../../api";
 import { Stock } from "../../common/types/stock";
+import SuggestionList from "./components/Suggestions";
 import { isStockValid, initialState } from "./constant";
 import useClickOutside from "../../hooks/useClickOutside";
 import Button from "../../common/components/Button/Button";
+import FlexContainer from "../../common/components/Box/Flex";
 import { Container, InputStyle, InputWrapper } from "./styled";
 import { autocompleteReducer } from "../../api/reducer/autocomplete";
-import { FlexContainer } from "../../common/components/Box/Flex/styled";
 import TextInput from "../../common/components/Input/TextInput/TextInput";
 
 const Search = () => {

@@ -7,4 +7,5 @@ export interface FlexProps {
   flexGrow?: string | number;
   flexShrink?: string | number;
   gap?: string;
+  children: React.ReactNode,
 }

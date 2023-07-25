@@ -2,7 +2,6 @@ import { FlexContainer } from "./styled";
 import { FlexProps } from "./types";
 
 const FlexBox = (
-  children: React.ReactNode,
   {
     gap,
     alignItems,
@@ -12,6 +11,7 @@ const FlexBox = (
     flexBasis,
     flexDirection,
     flexGrow,
+    children,
   }: FlexProps
 ): JSX.Element => {
   return (

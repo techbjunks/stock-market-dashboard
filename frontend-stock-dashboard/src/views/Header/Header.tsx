@@ -2,7 +2,7 @@ import Search from "../Search";
 import { HeaderSection } from "./styled";
 import Header from "../../common/ui/Header/Header";
 import ErrorBoundary from "../../common/ui/ErrorBoundary";
-import Title from "../../common/components/Typography/Title/Title";
+import Title from "../../common/components/Title/Title";
 
 interface HeaderContainerProps {
   title: string;

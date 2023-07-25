@@ -7,12 +7,14 @@ const Text = ({
   children,
   textAlign,
   className,
+  fontSize,
 }: TextProps): JSX.Element => {
   return (
     <BaseStyleText
       color={color}
       weight={weight}
       textAlign={textAlign}
+      fontSize={fontSize}
       className={className}
     >
       {children}

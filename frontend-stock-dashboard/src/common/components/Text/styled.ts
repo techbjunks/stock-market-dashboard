@@ -1,10 +1,10 @@
 import styled from 'styled-components';
-import { BaseStyleTextProps } from "./types";
+import { TextProps } from "./types";
 
-export const BaseStyleText = styled.div<BaseStyleTextProps>`
+export const BaseStyleText = styled.div<TextProps>`
   font-size: ${(props) => props.fontSize || "14px"};
   color: ${(props) => props.color || "#FFF"};
-  font-weight: ${(props) => props.weight || 600};
+  font-weight: ${(props) => props.weight || 400};
   text-align: ${(props) => props.textAlign || 'left'};
   ${(props) => props.className}
 `;

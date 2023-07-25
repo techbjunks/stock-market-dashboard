@@ -8,7 +8,7 @@ const useMobile = (breakpoint: number): boolean => {
   },[breakpoint]);
 
   useEffect(() => {
-    handleResize(); // Initial check on load
+    handleResize();
     window.addEventListener("resize", handleResize);
 
     return () => {
