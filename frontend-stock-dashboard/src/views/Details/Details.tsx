@@ -67,22 +67,6 @@ const Home = () => {
 
   useEffect(() => {
     console.log(symbol);
-    const fetchStockDetail = async (query: string) => {
-        try {
-          dispatch({ type: StockDetailActionTypes.FETCH_START });
-          // const response = await fetch(getStockResults(query));
-          const response = await fetch(
-            "https://run.mocky.io/v3/04619120-b4c2-4b5f-8f49-8f5b7fe81146"
-          ); // remove this hard code before demo
-          const data = await response.json();
-          dispatch({
-            type: StockDetailActionTypes.FETCH_SUCCESS,
-            payload: data.bestMatches,
-          });
-        } catch (error) {
-          dispatch({ type: StockDetailActionTypes.FETCH_ERROR, payload: error });
-        }
-      };
   }, []);
 
   console.log('state + =', state);

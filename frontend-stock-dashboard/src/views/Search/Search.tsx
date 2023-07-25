@@ -6,7 +6,6 @@ import SuggestionList from "./Suggestions";
 import { fetchSuggestions } from "../../api";
 import { Stock } from "../../common/types/stock";
 import { isStockValid, initialState } from "./constant";
-import ErrorBoundary from "../../common/ui/ErrorBoundary";
 import useClickOutside from "../../hooks/useClickOutside";
 import Button from "../../common/components/Button/Button";
 import { Container, InputStyle, InputWrapper } from "./styled";
@@ -67,7 +66,6 @@ const Search = () => {
   useClickOutside(ref, handleOutsideClick);
 
   return (
-    <ErrorBoundary>
       <Container ref={ref}>
         <FlexContainer alignItems="center">
           <TextInput
@@ -93,7 +91,6 @@ const Search = () => {
           />
         )}
       </Container>
-    </ErrorBoundary>
   );
 };
 
