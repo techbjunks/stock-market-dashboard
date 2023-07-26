@@ -4,6 +4,7 @@ import { useEffect, useReducer } from "react";
 
 import { StockTable } from "./components";
 import { initialState } from "./constant";
+import { FilterContainer } from "./styled";
 import { fetchStockDetail } from "../../api";
 import ErrorBoundary from "../../common/ui/ErrorBoundary";
 import SelectComponent from "../../common/components/Select/Select";
@@ -14,7 +15,7 @@ let intervalTimer: number | null | undefined = null;
 
 const Home = () => {
   const { symbol } = useParams();
-  const [{ data, loading, error }, dispatch] = useReducer(
+  const [{ data, loading }, dispatch] = useReducer(
     fetchStockDetailReducer,
     initialState
   );
@@ -45,24 +46,26 @@ const Home = () => {
   return (
     <ErrorBoundary>
       <Header title="Stock Detail" />
-      <SelectComponent
-        options={[
-          {
-            label: "1 min",
-            value: "3000",
-          },
-          {
-            label: "2 min",
-            value: "120000",
-          },
-          {
-            label: CLEAR,
-            value: CLEAR,
-          },
-        ]}
-        placeholder="Auto Refresh Time"
-        onChange={updateAPIInterval}
-      />
+      <FilterContainer>
+        <SelectComponent
+          options={[
+            {
+              label: "3 seconds",
+              value: "3000",
+            },
+            {
+              label: "10 seconds",
+              value: "10000",
+            },
+            {
+              label: CLEAR,
+              value: CLEAR,
+            },
+          ]}
+          placeholder="Auto Refresh Time"
+          onChange={updateAPIInterval}
+        />
+      </FilterContainer>
       <StockTable isLoading={loading} data={data} key={data.Symbol} />
     </ErrorBoundary>
   );

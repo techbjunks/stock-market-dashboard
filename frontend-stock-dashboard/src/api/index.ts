@@ -48,7 +48,6 @@ export const fetchStockDetail = async (
       {},
       cacheTime
     );
-    console.log("response value", response);
     dispatch({
       type: StockDetailActionTypes.FETCH_SUCCESS,
       payload: response,
