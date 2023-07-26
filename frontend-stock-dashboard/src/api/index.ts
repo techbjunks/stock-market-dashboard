@@ -28,7 +28,11 @@ export const fetchSuggestions = async (
   }
 };
 
-export const fetchStockDetail = async (symbol: string | undefined, dispatch: React.Dispatch<StockDetailAction>, validationCb?: () => boolean) => {
+export const fetchStockDetail = async (
+  symbol: string | undefined,
+  dispatch: React.Dispatch<StockDetailAction>,
+  validationCb?: () => boolean
+) => {
   if ((validationCb && validationCb()) || !symbol) {
     return;
   }
@@ -36,7 +40,9 @@ export const fetchStockDetail = async (symbol: string | undefined, dispatch: Rea
   try {
     dispatch({ type: StockDetailActionTypes.FETCH_START });
     // const response = await fetch(getStockDetail(symbol));
-    const response = await fetch('https://run.mocky.io/v3/22c30f53-6537-4e10-86f0-47c3fe26b29c');
+    const response = await fetch(
+      "https://run.mocky.io/v3/22c30f53-6537-4e10-86f0-47c3fe26b29c"
+    );
     const data = await response.json();
     dispatch({
       type: StockDetailActionTypes.FETCH_SUCCESS,

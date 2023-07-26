@@ -1,15 +1,17 @@
 import styled, { keyframes } from 'styled-components';
 
 export const AutocompleteList = styled.ul`
-  list-style: none;
   padding: 0;
   margin: 0;
   width: 70%;
+  position: relative;
+  z-index: 9999;
   max-height: 200px;
   overflow-y: auto;
   background-color: #f9f9f9;
   border: 1px solid #ddd;
   border-radius: 8px;
+  list-style: none;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 
   @media screen and (max-width: 768px) {

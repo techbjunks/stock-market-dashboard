@@ -5,7 +5,7 @@ import Title from "../../../../common/components/Title";
 import { StockTableProps, InfoItemType } from "./types";
 import Text from "../../../../common/components/Text/Text";
 import FlexBox from "../../../../common/components/Box/Flex/Flex";
-import { StockTableContainer, InfoContainer, RowItem } from "./styled";
+import { StockTableContainer, InfoContainer, RowItem, SkeletonItem } from "./styled";
 
 const InfoItem = ({ title, value, color }: InfoItemType): JSX.Element => (
   <RowItem>
@@ -15,8 +15,37 @@ const InfoItem = ({ title, value, color }: InfoItemType): JSX.Element => (
   </RowItem>
 );
 
-const StockTable = ({ data }: StockTableProps): JSX.Element => {
+const SkeletonLoader = () => (
+  <StockTableContainer>
+    <FlexBox gap="40px" flexDirection="row">
+      <InfoContainer>
+        <Title as="h4" size="medium" color="#2a2e39">
+          Latest Quote - <SkeletonItem width="100px" />
+          <SkeletonItem width="80px" />
+        </Title>
+        <SkeletonItem width="100%" height="16px" />
+        <SkeletonItem width="100%" height="16px" />
+        <SkeletonItem width="100%" height="16px" />
+        <SkeletonItem width="100%" height="16px" />
+        <SkeletonItem width="100%" height="16px" />
+        <SkeletonItem width="100%" height="16px" />
+      </InfoContainer>
+      <InfoContainer>
+        <Title as="h4" size="medium" color="#2a2e39">
+          Chart
+        </Title>
+      </InfoContainer>
+    </FlexBox>
+  </StockTableContainer>
+);
+
+const StockTable = ({ data, isLoading }: StockTableProps): JSX.Element => {
   const isMobile = useMobile(768);
+  
+  if(isLoading) {
+    return <SkeletonLoader />
+  }
+
   return (
     <StockTableContainer>
       <FlexBox

@@ -17,12 +17,12 @@ const Home = () => {
   );
   useEffect(() => {
     fetchStockDetail(symbol, dispatch);
-  }, []);
+  }, [symbol]);
 
   return (
     <>
       <Header title="Stock Detail" />
-      <StockTable data={data} key={data.Symbol} />
+      <StockTable isLoading={loading} data={data} key={data.Symbol} />
     </>
   );
 };
