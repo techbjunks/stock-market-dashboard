@@ -10,7 +10,7 @@ import SelectComponent from "../../common/components/Select/Select";
 import fetchStockDetailReducer from "../../api/reducer/stockdetails";
 
 const CLEAR = "clear";
-let intervalTimer: number | undefined = undefined;
+let intervalTimer: number | null | undefined = null;
 
 const Home = () => {
   const { symbol } = useParams();
@@ -32,7 +32,7 @@ const Home = () => {
 
     if (value === CLEAR) {
       clearInterval(intervalTimer);
-      intervalTimer = undefined;
+      intervalTimer = null;
     }
 
     if (numericValue > 0) {
