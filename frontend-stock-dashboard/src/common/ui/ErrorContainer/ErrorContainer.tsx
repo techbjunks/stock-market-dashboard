@@ -24,7 +24,7 @@ const DefaultErrorMessage =
 const ErrorComponent = ({ message = DefaultErrorMessage }) => {
   return (
     <ErrorContainer>
-      <ErrorIcon>😿</ErrorIcon>
+      <ErrorIcon>🔎</ErrorIcon>
       {message}
     </ErrorContainer>
   );
