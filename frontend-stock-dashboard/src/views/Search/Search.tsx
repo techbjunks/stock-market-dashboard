@@ -10,7 +10,7 @@ import useClickOutside from "../../hooks/useClickOutside";
 import Button from "../../common/components/Button/Button";
 import FlexContainer from "../../common/components/Box/Flex";
 import { Container, InputStyle, InputWrapper } from "./styled";
-import { autocompleteReducer } from "../../api/reducer/autocomplete";
+import { autocompleteReducer } from "../../api/reducer/stock-reducers/stocks-suggestions";
 import TextInput from "../../common/components/Input/TextInput/TextInput";
 
 const Search = () => {

@@ -1,4 +1,4 @@
-import {AutocompleteState, AutocompleteAction, AutocompleteActionTypes} from '../../types/autocomplete';
+import {AutocompleteState, AutocompleteAction, AutocompleteActionTypes} from './types';
 
 export const autocompleteReducer = (
   state: AutocompleteState,

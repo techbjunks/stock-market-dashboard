@@ -1,3 +1,3 @@
-import StockTable from "./StockTable";
+import StockTable from "./StockInfo";
 
 export {StockTable}

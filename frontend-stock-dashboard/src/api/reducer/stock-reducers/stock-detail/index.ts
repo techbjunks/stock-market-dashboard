@@ -2,7 +2,7 @@ import {
   StockDetailState,
   StockDetailAction,
   StockDetailActionTypes,
-} from "../../types/stockdetails";
+} from "./types";
 
 
 const stockDetailsReducer = (
