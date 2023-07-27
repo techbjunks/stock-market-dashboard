@@ -6,8 +6,11 @@ import { StockTable } from "./components";
 import { initialState } from "./constant";
 import { FilterContainer } from "./styled";
 import { fetchStockDetail } from "../../api";
+import FlexBox from "../../common/components/Box/Flex";
 import ErrorBoundary from "../../common/ui/ErrorBoundary";
+import Button from "../../common/components/Button/Button";
 import SelectComponent from "../../common/components/Select/Select";
+import useRouteNavigationType from "../../hooks/useRouteNavigation";
 import fetchStockDetailReducer from "../../api/reducer/stockdetails";
 
 const CLEAR = "clear";
@@ -15,6 +18,7 @@ let intervalTimer: number | null | undefined = null;
 
 const Home = () => {
   const { symbol } = useParams();
+  const { previousRoute, forwardRoute } = useRouteNavigationType();
   const [{ data, loading }, dispatch] = useReducer(
     fetchStockDetailReducer,
     initialState
@@ -65,8 +69,12 @@ const Home = () => {
           placeholder="Auto Refresh Time"
           onChange={updateAPIInterval}
         />
+        <StockTable isLoading={loading} data={data} key={data.Symbol} />
+        <FlexBox gap="40px">
+          <Button onClick={previousRoute}>Back</Button>
+          <Button onClick={forwardRoute}>Next</Button>
+        </FlexBox>
       </FilterContainer>
-      <StockTable isLoading={loading} data={data} key={data.Symbol} />
     </ErrorBoundary>
   );
 };

@@ -2,7 +2,7 @@ import { StyledButton } from "./styled";
 import { ButtonProps } from "./types";
 
 const Button = ({
-  type,
+  type = "button",
   onClick,
   children,
   ariaLabel,
