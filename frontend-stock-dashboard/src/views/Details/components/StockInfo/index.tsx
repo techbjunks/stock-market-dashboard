@@ -1,3 +1,4 @@
+import Chart from '../StockChart';
 import theme from "../../../../theme";
 import { useMobile } from "../../../../hooks";
 import { getStockPrice } from "../../../../utils";
@@ -69,9 +70,7 @@ const StockTable = ({ data, isLoading }: StockTableProps): JSX.Element => {
         />
       </InfoContainer>
       <InfoContainer>
-        <Title as="h4" size="medium" color="#2a2e39">
-          Chart
-        </Title>
+       
       </InfoContainer>
     </FlexBox>
   );

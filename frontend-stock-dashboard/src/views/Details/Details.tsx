@@ -4,9 +4,9 @@ import { useEffect, useReducer } from "react";
 
 import { StockTable } from "./components";
 import { initialState } from "./constant";
-import { FilterContainer } from "./styled";
 import { fetchStockDetail } from "../../api";
 import FlexBox from "../../common/components/Box/Flex";
+import { FilterContainer } from "./styled";
 import ErrorBoundary from "../../common/ui/ErrorBoundary";
 import Button from "../../common/components/Button/Button";
 import SelectComponent from "../../common/components/Select/Select";
