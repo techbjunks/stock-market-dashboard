@@ -1,3 +1,3 @@
-import { fetchSuggestions, fetchStockDetail } from "./services";
+import { fetchSuggestions, fetchStockDetail, fetchStockChart } from "./services";
 
-export { fetchSuggestions, fetchStockDetail };
+export { fetchSuggestions, fetchStockDetail, fetchStockChart };
