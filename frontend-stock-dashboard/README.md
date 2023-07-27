@@ -2,7 +2,7 @@
 
 This is a frontend craft project for SSE to build a stock picker widget using Vite. The widget allows users to search for stock symbols and view detailed information about the selected stock. It also provides additional functionalities like multiple searches, navigation history, and data refresh.
 
-#Features
+## Features
 - Search bar with autocomplete functionality to find stocks by symbol.
 - Detailed stock information including Name, Symbol, Description, Current Price, Change, Traded On, Industry, PE Ratio, and Market Cap.
 - Stock price chart for the day (optional, good to have).
@@ -15,17 +15,17 @@ Follow the steps below to get the project up and running on your local machine.
 
 Clone the repository:
 
-git clone https://github.com/your-username/vite-stock-project.git
+git clone https://github.com/techbjunks/stock-market-dashboard
 cd vite-stock-project
 Install dependencies:
-bash
-Copy code
-npm install
+
+npm install / yarn install
 Run the development server:
-bash
-Copy code
-npm run dev
-Open your browser and visit http://localhost:3000 to see the stock picker widget in action.
+
+npm run dev / yarn run dev
+
+Open your browser and visit http://localhost:5173/ to see the stock picker widget in action.
+
 Usage
 Enter a stock symbol in the search bar.
 As you type, an autocomplete list will appear with stocks matching the search term.
@@ -49,15 +49,12 @@ Notes
 Please note that this project is meant to showcase frontend development skills and may not include all features or error handling present in a production-ready application. It uses a sample API key for demonstration purposes, and it's recommended to replace it with your own API key for real-world use.
 
 Credits
-This project was created by Your Name.
+This project was created by Bhaskar Mishra.
 
 License
 This project is open-source and available under the MIT License. Feel free to use, modify, and distribute it as per the terms of the license.
 
 Feel free to customize this README according to your project's specific details and requirements. The README should provide clear instructions for running the project, list any dependencies used, and give credit to the original creator. Additionally, you can include information about how to contribute or report issues if the project is intended for collaborative development.
-
-
-
 
 User
 # React + TypeScript + Vite
