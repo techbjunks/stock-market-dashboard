@@ -70,7 +70,7 @@ const StockTable = ({ data, isLoading }: StockTableProps): JSX.Element => {
         />
       </InfoContainer>
       <InfoContainer>
-       
+        {data.Symbol && <Chart symbol={data.Symbol} />}
       </InfoContainer>
     </FlexBox>
   );

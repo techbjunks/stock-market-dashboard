@@ -1,51 +1,83 @@
-import React from "react";
-import { Line } from "react-chartjs-2";
+import React, { useState } from 'react';
+import {
+  Chart as ChartJS,
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  Title,
+  Tooltip,
+  Legend,
+} from 'chart.js';
+import { Line } from 'react-chartjs-2';
 
-interface Props {
-  data: Record<string, any>;
-}
+ChartJS.register(
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  Title,
+  Tooltip,
+  Legend
+);
 
-const LineChart: React.FC<Props> = ({ data }) => {
-  const chartData = {
-    labels: Object.keys(data["Time Series (Daily)"]),
-    datasets: [
-      {
-        label: "Stock Price",
-        data: Object.values(data["Time Series (Daily)"]).map((item: any) =>
-          parseFloat(item.close)
-        ),
-        borderColor: "rgba(75, 192, 192, 1)",
-        borderWidth: 2,
-        fill: false,
-      },
-    ],
-  };
-
-  const chartOptions = {
-    responsive: true,
-    maintainAspectRatio: false,
-    scales: {
-      x: {
-        type: "time",
-        time: {
-          unit: "day",
-          displayFormats: {
-            day: "MMM DD",
-          },
-        },
-        ticks: {
-          maxTicksLimit: 5,
-        },
-      },
-      y: {
-        ticks: {
-          callback: (value:unknown) => `$${value}`,
-        },
-      },
+const initialData = {
+  labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+  datasets: [
+    {
+      label: 'Dataset 1',
+      data: [400, 550, 600, 700, 800, 900, 1000],
+      borderColor: 'rgb(255, 99, 132)',
+      backgroundColor: 'rgba(255, 99, 132, 0.5)',
     },
+    {
+      label: 'Dataset 2',
+      data: [300, 450, 500, 600, 700, 800, 900],
+      borderColor: 'rgb(53, 162, 235)',
+      backgroundColor: 'rgba(53, 162, 235, 0.5)',
+    },
+  ],
+};
+
+const options = {
+  responsive: true,
+  plugins: {
+    legend: {
+      position: 'top',
+    },
+    title: {
+      display: true,
+      text: 'Chart.js Line Chart',
+    },
+  },
+};
+
+const LineChart = () => {
+  const [data, setData] = useState(initialData);
+
+  // Function to generate random data for the datasets
+  const generateRandomData = () => {
+    const newData = {
+      ...data,
+      datasets: data.datasets.map((dataset) => ({
+        ...dataset,
+        data: data.labels.map(() => Math.floor(Math.random() * 1000)),
+      })),
+    };
+    setData(newData);
   };
 
-  return <Line data={chartData} options={chartOptions} />;
+  // Initial data generation on component mount
+  useState(() => {
+    generateRandomData();
+  }, []);
+
+  return (
+    <div>
+      <button onClick={generateRandomData}>Generate Random Data</button>
+      <Line options={options} data={data} />
+    </div>
+  );
 };
 
 export default LineChart;

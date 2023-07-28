@@ -50,3 +50,4 @@ export const initialState: StockDetailState = {
   data: initialStockData,
   error: false,
 };
+
