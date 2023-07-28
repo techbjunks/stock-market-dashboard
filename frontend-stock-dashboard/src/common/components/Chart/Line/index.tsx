@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -55,7 +55,6 @@ const options = {
 const LineChart = () => {
   const [data, setData] = useState(initialData);
 
-  // Function to generate random data for the datasets
   const generateRandomData = () => {
     const newData = {
       ...data,
@@ -67,7 +66,6 @@ const LineChart = () => {
     setData(newData);
   };
 
-  // Initial data generation on component mount
   useState(() => {
     generateRandomData();
   }, []);
