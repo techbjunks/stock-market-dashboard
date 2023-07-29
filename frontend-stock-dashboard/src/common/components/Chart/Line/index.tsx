@@ -72,7 +72,17 @@ const options = {
   },
 };
 
-const LineChart = ({ chartData }) => {
+interface ChartData {
+  [key: string]: {
+    open: string;
+    high: string;
+    low: string;
+    close: string;
+    volume: string;
+  };
+}
+
+const LineChart = ({ chartData }: ChartData) => {
   const [data, setData] = useState(initialData);
 
   const updateChartData = () => {
@@ -80,19 +90,30 @@ const LineChart = ({ chartData }) => {
       return;
     }
 
-    const getData = Object.values(chartData["Time Series (Daily)"]).map((data) => {
-      return +data['1. open'];
-    })
+    const entries: [string, ChartData[keyof ChartData]][] = Object.entries<ChartData>(
+      chartData["Time Series (Daily)"]
+    ).slice(0, 10);
+    
+    const updatedData = {
+      labels: [] as string[],
+      data: [] as number[],
+    };
+    
+    entries.forEach(([key, dataObj]) => {
+      updatedData.labels.unshift(key);
+      updatedData.data.unshift(+dataObj['1. open']);
+    });
 
+    console.log('updatedData', updatedData);
     const newData = {
       ...data,
       datasets: [
         {
           ...data.datasets[0],
-          data: getData
+          data: updatedData.data
         },
       ],
-      labels: Object.keys(chartData["Time Series (Daily)"]),
+      labels: updatedData.labels,
     };
     setData(newData);
   };

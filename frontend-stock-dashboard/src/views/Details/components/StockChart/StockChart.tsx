@@ -7,9 +7,10 @@ import fetchChartReducer from "../../../../api/reducer/stock-reducers/stock-char
 
 interface StockChartType {
   symbol: string,
+  stockName: string,
 }
 
-const StockChart = ({ symbol }: StockChartType) => {
+const StockChart = ({ symbol, stockName }: StockChartType) => {
   const [{ data, loading }, dispatch] = useReducer(fetchChartReducer, initialState);
 
   useEffect(() => {
