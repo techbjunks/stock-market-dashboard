@@ -1,6 +1,7 @@
 import { useEffect, useReducer } from "react";
 import { initialState } from "./constant";
 import { fetchStockChart } from "../../../../api";
+import Chart from './Graph';
 import Title from "../../../../common/components/Title/Title";
 import LineChart from "../../../../common/components/Chart/Line/index";
 import fetchChartReducer from "../../../../api/reducer/stock-reducers/stock-chart";
@@ -25,7 +26,7 @@ const StockChart = ({ symbol, stockName }: StockChartType) => {
       <Title as="h4" size="medium" color="#2a2e39">
         Chart
       </Title>
-      {!loading && data && <LineChart chartData={data} />}
+      {!loading && data && <Chart chartData={data} />}
     </>
   );
 };
