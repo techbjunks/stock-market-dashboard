@@ -13,15 +13,18 @@ const StockChart = ({ symbol }: StockChartType) => {
   const [{ data, loading }, dispatch] = useReducer(fetchChartReducer, initialState);
 
   useEffect(() => {
-    fetchStockChart(symbol, dispatch);
-  }, []);
-  console.log(data, data['Time Series (Daily)']);
+    const getStockChartData = async () => {
+      await fetchStockChart(symbol, dispatch);
+    }
+    getStockChartData();
+  }, [symbol]);
+
   return (
     <>
       <Title as="h4" size="medium" color="#2a2e39">
         Chart
       </Title>
-      <LineChart data={data} />
+      {!loading && data && <LineChart chartData={data} />}
     </>
   );
 };

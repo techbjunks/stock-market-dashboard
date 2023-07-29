@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from "react";
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -8,8 +8,8 @@ import {
   Title,
   Tooltip,
   Legend,
-} from 'chart.js';
-import { Line } from 'react-chartjs-2';
+} from "chart.js";
+import { Line } from "react-chartjs-2";
 
 ChartJS.register(
   CategoryScale,
@@ -21,20 +21,40 @@ ChartJS.register(
   Legend
 );
 
+const rawData = {
+  MetaData: {
+    "1. Information": "Daily Prices (open, high, low, close) and Volumes",
+    "2. Symbol": "AAPL",
+    "3. Last Refreshed": "2023-07-26",
+    "4. Output Size": "Compact",
+    "5. Time Zone": "US/Eastern",
+  },
+  "Time Series (Daily)": {
+    "2023-07-26": {
+      open: "193.6700",
+      high: "195.6400",
+      low: "193.3200",
+      close: "194.5000",
+      volume: "47471868",
+    },
+    "2023-07-25": {
+      open: "193.3300",
+      high: "194.4400",
+      low: "192.9150",
+      close: "193.6200",
+      volume: "37283201",
+    },
+  },
+};
+
 const initialData = {
-  labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+  labels: ["Bhag ja", "February", "March", "April", "May", "June", "July"],
   datasets: [
     {
-      label: 'Dataset 1',
+      label: "Dataset 1",
       data: [400, 550, 600, 700, 800, 900, 1000],
-      borderColor: 'rgb(255, 99, 132)',
-      backgroundColor: 'rgba(255, 99, 132, 0.5)',
-    },
-    {
-      label: 'Dataset 2',
-      data: [300, 450, 500, 600, 700, 800, 900],
-      borderColor: 'rgb(53, 162, 235)',
-      backgroundColor: 'rgba(53, 162, 235, 0.5)',
+      borderColor: "rgb(255, 99, 132)",
+      backgroundColor: "rgba(255, 99, 132, 0.5)",
     },
   ],
 };
@@ -43,38 +63,48 @@ const options = {
   responsive: true,
   plugins: {
     legend: {
-      position: 'top',
+      position: "top",
     },
     title: {
       display: true,
-      text: 'Chart.js Line Chart',
+      text: "Chart.js Line Chart",
     },
   },
 };
 
-const LineChart = () => {
+const LineChart = ({ chartData }) => {
   const [data, setData] = useState(initialData);
 
-  const generateRandomData = () => {
+  const updateChartData = () => {
+    if (!chartData || !chartData["Time Series (Daily)"]) {
+      return;
+    }
+
+    const getData = Object.values(chartData["Time Series (Daily)"]).map((data) => {
+      return +data['1. open'];
+    })
+
     const newData = {
       ...data,
-      datasets: data.datasets.map((dataset) => ({
-        ...dataset,
-        data: data.labels.map(() => Math.floor(Math.random() * 1000)),
-      })),
+      datasets: [
+        {
+          ...data.datasets[0],
+          data: getData
+        },
+      ],
+      labels: Object.keys(chartData["Time Series (Daily)"]),
     };
     setData(newData);
   };
 
-  useState(() => {
-    generateRandomData();
+  useEffect(() => {
+    updateChartData();
   }, []);
 
   return (
-    <div>
-      <button onClick={generateRandomData}>Generate Random Data</button>
+    <>
       <Line options={options} data={data} />
-    </div>
+    </>
   );
 };
 
