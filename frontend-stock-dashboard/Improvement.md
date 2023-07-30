@@ -23,7 +23,7 @@
     }
 2. Central Level Error Monitoring
     Sentry/bugsnag for Error Monitoring, we can use ErrorBoundary for sending the events.
-3. JS Code Splitting
+3. JS Code Splitting / Bundle creation
 4. E2E Test Suite / Snapshot testing can be incorporated.
 5. ESLint configuration for standard code delivery
 6. Lighthouse Performance check
@@ -45,4 +45,5 @@
             - border
             - position - (padding, margin) - theme.spacing[0], theme.spacing[1], theme.spacing[2] for   consitent spacing around layout
 15. In useNavigationROute , we can create hasNext:boolean to check if forward route is there or not.
-16. API_KEY is in constant , ideally it should not be kept there.
+16. API_KEY is in constant , ideally it should not be kept there on client side.
+17. Story-book for components

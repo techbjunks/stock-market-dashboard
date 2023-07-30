@@ -10,6 +10,7 @@ import FlexBox from "../../common/components/Box/Flex";
 import ErrorBoundary from "../../common/ui/ErrorBoundary";
 import useRouteNavigation from "../../hooks/useRouteNavigation";
 import SelectComponent from "../../common/components/Select/Select";
+import ErrorComponent from "../../common/ui/ErrorContainer";
 import fetchStockDetailReducer from "../../api/reducer/stock-reducers/stock-detail";
 
 let intervalTimer: number | null | undefined = null;
@@ -17,7 +18,7 @@ let intervalTimer: number | null | undefined = null;
 const Home = () => {
   const { symbol } = useParams();
   const { previousRoute, forwardRoute } = useRouteNavigation();
-  const [{ data, loading }, dispatch] = useReducer(
+  const [{ data, loading, error }, dispatch] = useReducer(
     fetchStockDetailReducer,
     initialState
   );
@@ -49,29 +50,35 @@ const Home = () => {
     <ErrorBoundary>
       <Header title="Stock Detail" />
       <FilterContainer>
-        <SelectComponent
-          options={[
-            {
-              label: "3 seconds",
-              value: "3000",
-            },
-            {
-              label: "10 seconds",
-              value: "10000",
-            },
-            {
-              label: CLEAR,
-              value: CLEAR,
-            },
-          ]}
-          placeholder="Auto Refresh Time"
-          onChange={updateAPIInterval}
-        />
-        <StockTable isLoading={loading} data={data} key={data.Symbol} />
-        <FlexBox gap="40px">
-          <Button onClick={previousRoute}>Back</Button>
-          <Button onClick={forwardRoute}>Next</Button>
-        </FlexBox>
+        {error ? (
+          <ErrorComponent message="Service is down, our team is working closely on it." />
+        ) : (
+          <>
+            <SelectComponent
+              options={[
+                {
+                  label: "3 seconds",
+                  value: "3000",
+                },
+                {
+                  label: "10 seconds",
+                  value: "10000",
+                },
+                {
+                  label: CLEAR,
+                  value: CLEAR,
+                },
+              ]}
+              placeholder="Auto Refresh Time"
+              onChange={updateAPIInterval}
+            />
+            <StockTable isLoading={loading} data={data} key={data.Symbol} />
+            <FlexBox gap="40px">
+              <Button onClick={previousRoute}>Back</Button>
+              <Button onClick={forwardRoute}>Next</Button>
+            </FlexBox>
+          </>
+        )}
       </FilterContainer>
     </ErrorBoundary>
   );

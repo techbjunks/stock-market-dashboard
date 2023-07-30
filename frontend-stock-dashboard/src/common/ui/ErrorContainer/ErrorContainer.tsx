@@ -2,15 +2,15 @@ import styled from "styled-components";
 
 const ErrorContainer = styled.div`
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 20px;
-  background-color: #f8d7da;
-  border: 1px solid #f5c6cb;
-  border-radius: 8px;
   color: #721c24;
+  padding: 20px;
   font-size: 1.2rem;
+  border-radius: 8px;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  background-color: #fce5cd;
+  border: 1px solid #f0c38c;
 `;
 
 const ErrorIcon = styled.span`
