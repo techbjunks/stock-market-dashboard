@@ -1,61 +1,31 @@
 import { useState, useEffect } from "react";
-import Chart from '../../../../../common/components/Chart/Line'
 
-const initialData = {
-  labels: ["January", "February", "March", "April", "May", "June", "July"],
-  datasets: [
-    {
-      label: "Dataset 1",
-      data: [400, 550, 600, 700, 800, 900, 1000],
-      borderColor: "rgb(255, 99, 132)",
-      backgroundColor: "rgba(255, 99, 132, 0.5)",
-    },
-  ],
-};
+import { initialData, options } from "./constant";
+import { LineChartProps, LineChartData } from "./types";
+import Chart from "../../../../../common/components/Chart/Line";
 
-const options = {
-  responsive: true,
-  plugins: {
-    legend: {
-      position: "top",
-    },
-    title: {
-      display: true,
-      text: "Chart",
-    },
-  },
-};
-
-interface ChartData {
-  [key: string]: {
-    open: string;
-    high: string;
-    low: string;
-    close: string;
-    volume: string;
-  };
-}
-
-const LineChart = ({ chartData }: ChartData) => {
+const LineChart = ({ chartData, labelPosition = "top", column = 10 }: LineChartProps) => {
   const [data, setData] = useState(initialData);
 
-  const updateChartData = () => {
+  const updateChart = () => {
     if (!chartData || !chartData["Time Series (Daily)"]) {
       return;
     }
 
-    const entries: [string, ChartData[keyof ChartData]][] = Object.entries<ChartData>(
-      chartData["Time Series (Daily)"]
-    ).slice(0, 10);
-    
+    const entries: [string, LineChartData[keyof LineChartData]][] =
+      Object.entries<LineChartData>(chartData["Time Series (Daily)"]).slice(
+        0,
+        column
+      );
+
     const updatedData = {
       labels: [] as string[],
       data: [] as number[],
     };
-    
+
     entries.forEach(([key, dataObj]) => {
       updatedData.labels.unshift(key);
-      updatedData.data.unshift(+dataObj['1. open']);
+      updatedData.data.unshift(+dataObj["1. open"]);
     });
 
     const newData = {
@@ -63,7 +33,7 @@ const LineChart = ({ chartData }: ChartData) => {
       datasets: [
         {
           ...data.datasets[0],
-          data: updatedData.data
+          data: updatedData.data,
         },
       ],
       labels: updatedData.labels,
@@ -72,7 +42,8 @@ const LineChart = ({ chartData }: ChartData) => {
   };
 
   useEffect(() => {
-    updateChartData();
+    updateChart();
+    options.plugins.legend.position = labelPosition;
   }, []);
 
   return (

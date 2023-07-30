@@ -8,6 +8,7 @@ import {
   Tooltip,
   Legend,
 } from "chart.js";
+import { useEffect } from "react";
 import { Line } from "react-chartjs-2";
 
 ChartJS.register(
@@ -21,12 +22,16 @@ ChartJS.register(
 );
 
 interface LineChartProps {
-    options: unknown,
-    data: unknown,
+  options: unknown;
+  data: unknown;
 }
 
-
-const LineChart = ({ options, data }: LineChartProps):JSX.Element => {
+const LineChart = ({ options, data }: LineChartProps): JSX.Element => {
+  useEffect(() => {
+    return () => {
+      ChartJS.unregister();
+    };
+  }, []);
   return (
     <>
       <Line options={options} data={data} />

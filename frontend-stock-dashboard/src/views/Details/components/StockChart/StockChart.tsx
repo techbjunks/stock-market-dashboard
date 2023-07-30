@@ -3,7 +3,6 @@ import { initialState } from "./constant";
 import { fetchStockChart } from "../../../../api";
 import Chart from './Graph';
 import Title from "../../../../common/components/Title/Title";
-import LineChart from "../../../../common/components/Chart/Line/index";
 import fetchChartReducer from "../../../../api/reducer/stock-reducers/stock-chart";
 
 interface StockChartType {
@@ -24,7 +23,7 @@ const StockChart = ({ symbol, stockName }: StockChartType) => {
   return (
     <>
       <Title as="h4" size="medium" color="#2a2e39">
-        Chart
+        {stockName} Chart
       </Title>
       {!loading && data && <Chart chartData={data} />}
     </>
