@@ -1,24 +1,22 @@
 import Header from "../Header";
+import { StockTable } from "./components";
+import { FilterContainer } from "./styled";
+import { fetchStockDetail } from "../../api";
 import { useParams } from "react-router-dom";
 import { useEffect, useReducer } from "react";
-
-import { StockTable } from "./components";
-import { initialState } from "./constant";
-import { fetchStockDetail } from "../../api";
+import { initialState, CLEAR } from "./constant";
+import Button from "../../common/components/Button";
 import FlexBox from "../../common/components/Box/Flex";
-import { FilterContainer } from "./styled";
 import ErrorBoundary from "../../common/ui/ErrorBoundary";
-import Button from "../../common/components/Button/Button";
+import useRouteNavigation from "../../hooks/useRouteNavigation";
 import SelectComponent from "../../common/components/Select/Select";
-import useRouteNavigationType from "../../hooks/useRouteNavigation";
 import fetchStockDetailReducer from "../../api/reducer/stock-reducers/stock-detail";
 
-const CLEAR = "clear";
 let intervalTimer: number | null | undefined = null;
 
 const Home = () => {
   const { symbol } = useParams();
-  const { previousRoute, forwardRoute } = useRouteNavigationType();
+  const { previousRoute, forwardRoute } = useRouteNavigation();
   const [{ data, loading }, dispatch] = useReducer(
     fetchStockDetailReducer,
     initialState

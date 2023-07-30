@@ -5,6 +5,12 @@ const theme = {
             fontSize: '20px',
             lineHeight: '24px',
             fontWeight: 600,
+        },
+        highlight: {
+            color: '#5f12c7',
+        },
+        heading: {
+            color: '#2a2e39',
         }
     }
 }
