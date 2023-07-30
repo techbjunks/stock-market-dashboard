@@ -1,7 +1,7 @@
 import { useEffect, useReducer } from "react";
+import Chart from './Graph';
 import { initialState } from "./constant";
 import { fetchStockChart } from "../../../../api";
-import Chart from './Graph';
 import Title from "../../../../common/components/Title/Title";
 import fetchChartReducer from "../../../../api/reducer/stock-reducers/stock-chart";
 
@@ -15,11 +15,11 @@ const StockChart = ({ symbol, stockName }: StockChartType) => {
 
   useEffect(() => {
     const getStockChartData = async () => {
-      await fetchStockChart(symbol, dispatch);
+      await fetchStockChart(symbol, dispatch, 3600000);
     }
     getStockChartData();
   }, [symbol]);
-
+  console.log('data', data);
   return (
     <>
       <Title as="h4" size="medium" color="#2a2e39">

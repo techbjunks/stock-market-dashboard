@@ -44,7 +44,7 @@ const LineChart = ({ chartData, labelPosition = "top", column = 10 }: LineChartP
   useEffect(() => {
     updateChart();
     options.plugins.legend.position = labelPosition;
-  }, []);
+  }, [chartData]);
 
   return (
     <>

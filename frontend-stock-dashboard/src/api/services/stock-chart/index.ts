@@ -24,6 +24,7 @@ import { getStockChartDetail } from "../../endpoints";
         {},
         cacheTime
       );
+      console.log('response', response);
       dispatch({
         type: FetchChartActionTypes.FETCH_SUCCESS,
         payload: response,
