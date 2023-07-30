@@ -25,7 +25,7 @@ const StockChart = ({ symbol, stockName }: StockChartType) => {
       <Title as="h4" size="medium" color="#2a2e39">
         {stockName} Chart
       </Title>
-      {!loading && data && <Chart chartData={data} />}
+      {!loading && data && <Chart chartData={data} column={10} />}
     </>
   );
 };

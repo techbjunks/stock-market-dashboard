@@ -18,7 +18,7 @@ export const options = {
     },
     title: {
       display: true,
-      text: "Chart",
+      text: "Last 7 Day",
     },
   },
 };
