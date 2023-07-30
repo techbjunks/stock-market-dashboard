@@ -18,12 +18,12 @@ import { getStockChartDetail } from "../../endpoints";
   
     try {
       dispatch({ type: FetchChartActionTypes.FETCH_START });
-      const response = await queryCacheRecord(getStockChartDetail(symbol), {}, cacheTime);
-      // const response = await queryCacheRecord(
-      //   "https://run.mocky.io/v3/103b3b9d-87af-4aaa-b750-f971f911ed4a",
-      //   {},
-      //   cacheTime
-      // );
+      // const response = await queryCacheRecord(getStockChartDetail(symbol), {}, cacheTime);
+      const response = await queryCacheRecord(
+        "https://run.mocky.io/v3/103b3b9d-87af-4aaa-b750-f971f911ed4a",
+        {},
+        cacheTime
+      );
       dispatch({
         type: FetchChartActionTypes.FETCH_SUCCESS,
         payload: response,

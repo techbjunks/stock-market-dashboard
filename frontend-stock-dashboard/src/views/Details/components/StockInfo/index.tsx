@@ -31,7 +31,7 @@ const StockTable = ({ data, isLoading }: StockTableProps): JSX.Element => {
     >
       <InfoContainer>
         <Title as="h4" size="medium" color={theme.typography.heading.color}>
-          Latest Quote - {data.Name} {data.Symbol} {data.Country}
+          Latest Quote {data.Name} {data.Symbol} {data.Country}
         </Title>
         <InfoItem title="" value={data.Description} color={theme.typography.heading.color} />
         <InfoItem
