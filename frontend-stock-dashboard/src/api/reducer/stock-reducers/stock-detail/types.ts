@@ -1,4 +1,4 @@
-import { StockDetail } from "../../common/types/stock";
+import { StockDetail } from "../../../../common/types/stock";
 
 export interface StockDetailState {
   loading: boolean;

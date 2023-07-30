@@ -1,4 +1,4 @@
-import { AutocompleteState } from "../../../../api/types/autocomplete";
+import { AutocompleteState } from "../../../../api/reducer/stock-reducers/stocks-suggestions/types";
 import { Stock } from "../../../../common/types/stock";
 
 

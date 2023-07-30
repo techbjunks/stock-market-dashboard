@@ -1,4 +1,4 @@
-import { Stock } from "../../common/types/stock";
+import { Stock } from "../../../../common/types/stock";
 
 export interface AutocompleteState {
   loading: boolean;

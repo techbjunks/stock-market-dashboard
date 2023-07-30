@@ -1,4 +1,4 @@
-import { StockDetailState } from "../../api/types/stockdetails";
+import { StockDetailState } from "../../api/reducer/stock-reducers/stock-detail/types";
 
 export const initialStockData = {
   Symbol: "",
@@ -50,3 +50,4 @@ export const initialState: StockDetailState = {
   data: initialStockData,
   error: false,
 };
+
