@@ -19,7 +19,6 @@ const StockChart = ({ symbol, stockName }: StockChartType) => {
     }
     getStockChartData();
   }, [symbol]);
-  console.log('data', data);
   return (
     <>
       <Title as="h4" size="medium" color="#2a2e39">

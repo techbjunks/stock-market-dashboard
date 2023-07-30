@@ -1,9 +1,7 @@
-import { StockDetail } from "../../common/types/stock";
-
 export const cachedApiCall = async () => {
   const cache: Record<string, { value: unknown; expiry: number }> = {};
 
-  return async (url: string, config: RequestInit = {}, time = 0):Promise<StockDetail> => {
+  return async (url: string, config: RequestInit = {}, time = 0):Promise<unknown> => {
     const key = `${url}${JSON.stringify(config)}`;
     const entry = cache[key];
     if (!entry || Date.now() > entry.expiry) {

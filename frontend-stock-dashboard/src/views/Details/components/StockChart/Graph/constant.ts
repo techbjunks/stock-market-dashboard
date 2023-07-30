@@ -1,4 +1,4 @@
-export const initialData = {
+export const INITIAL_DATA = {
   labels: [],
   datasets: [
     {
@@ -10,7 +10,7 @@ export const initialData = {
   ],
 };
 
-export const options = {
+export const OPTIONS = {
   responsive: true,
   plugins: {
     legend: {
@@ -22,3 +22,5 @@ export const options = {
     },
   },
 };
+
+export const MINIMUM_CHART_DAYS = 3;
