@@ -37,7 +37,7 @@ const StockTable = ({ data, isLoading }: StockTableProps): JSX.Element => {
         <InfoItem
           title="Stock Price"
           color={theme.typography.highlight.color}
-          value={getStockPrice(data.EPS, data.PERatio, data.Currency)}
+          value={getStockPrice(data.EPS, data.PERatio, data.Currency) ?? ''}
         />
         <InfoItem title="PE Ratio" value={data.PERatio} color={theme.typography.highlight.color} />
         <InfoItem title="Exchange" value={data.Exchange} color={theme.typography.highlight.color} />
