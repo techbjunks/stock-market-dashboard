@@ -8,9 +8,9 @@ import { initialState, CLEAR } from "./constant";
 import Button from "../../common/components/Button";
 import FlexBox from "../../common/components/Box/Flex";
 import ErrorBoundary from "../../common/ui/ErrorBoundary";
+import ErrorComponent from "../../common/ui/ErrorContainer";
 import useRouteNavigation from "../../hooks/useRouteNavigation";
 import SelectComponent from "../../common/components/Select/Select";
-import ErrorComponent from "../../common/ui/ErrorContainer";
 import fetchStockDetailReducer from "../../api/reducer/stock-reducers/stock-detail";
 
 let intervalTimer: number | null | undefined = null;
@@ -22,22 +22,25 @@ const Home = () => {
     fetchStockDetailReducer,
     initialState
   );
-
+  
   useEffect(() => {
     fetchStockDetail(symbol, dispatch);
     return () => {
+      clearInterval(intervalTimer);
+      intervalTimer = null;
       const controller = new AbortController();
       controller.abort();
     };
   }, [symbol]);
 
   const updateAPIInterval = (value: string | []): void => {
-    const numericValue = +value;
-
     if (value === CLEAR) {
       clearInterval(intervalTimer);
       intervalTimer = null;
+      return;
     }
+
+    const numericValue = +value;
 
     if (numericValue > 0) {
       intervalTimer = setInterval(() => {
