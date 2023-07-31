@@ -4,7 +4,7 @@ const useMobile = (breakpoint: number): boolean => {
   const [isMobile, setIsMobile] = useState(false);
 
   const handleResize = useCallback(() => {
-    setIsMobile(window.innerWidth <= breakpoint);
+    setIsMobile(window.innerWidth <= breakpoint ?? 768);
   },[breakpoint]);
 
   useEffect(() => {

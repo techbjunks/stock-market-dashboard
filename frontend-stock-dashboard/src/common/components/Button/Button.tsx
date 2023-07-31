@@ -2,13 +2,19 @@ import { StyledButton } from "./styled";
 import { ButtonProps } from "./types";
 
 const Button = ({
-  type = "button",
-  onClick,
   children,
   ariaLabel,
+  type = "button",
+  onClick = () => {},
+  variant = "primary",
 }: ButtonProps): JSX.Element => {
   return (
-    <StyledButton aria-label={ariaLabel} type={type} onClick={onClick}>
+    <StyledButton
+      type={type}
+      variant={variant}
+      onClick={onClick}
+      aria-label={ariaLabel}
+    >
       {children}
     </StyledButton>
   );

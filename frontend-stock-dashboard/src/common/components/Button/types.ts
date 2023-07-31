@@ -1,6 +1,7 @@
 export interface ButtonProps {
-    ariaLabel?: string,
-    onClick: () => void,
-    type?: "button" | "submit" | "reset" | undefined,
-    children: React.ReactNode, 
+  ariaLabel?: string;
+  variant?: string;
+  onClick: () => void;
+  children: React.ReactNode;
+  type?: "button" | "submit" | "reset" | undefined;
 }

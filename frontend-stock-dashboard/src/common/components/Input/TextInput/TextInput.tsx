@@ -46,11 +46,11 @@ const TextInput = ({
           placeholder={placeholder}
         />
         {suffix && <span>{suffix}</span>}
+        {validationMessage && <label>{validationMessage}</label>}
       </div>
       {label && labelPosition === LABEL_POSITION.BOTTOM && (
         <label>{label}</label>
       )}
-      {validationMessage && <label>{validationMessage}</label>}
     </>
   );
 };

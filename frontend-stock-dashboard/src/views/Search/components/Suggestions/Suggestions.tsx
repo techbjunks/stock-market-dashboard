@@ -7,31 +7,38 @@ import {
 } from "./styled";
 import { Stock } from "../../../../common/types/stock";
 
+enum KEY_CONFIG {
+  ARROW_DOWN = 'ArrowDown',
+  ARROW_UP = 'ArrowUp',
+  ENTER = 'Enter'
+}
+
 const SuggestionsList = ({
   response,
   EmptyComponent,
   onSuggestionClickCb,
 }: SuggestionPropsType): JSX.Element => {
+  const isLoading = response.loading;
   const [selectedIndex, setSelectedIndex] = useState(-1);
   const suggestions: Stock[] = response?.suggestions;
-  const isLoading = response.loading;
+
   const onStockClick = (stock: Stock) => {
     onSuggestionClickCb?.(stock);
   };
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLLIElement>) => {
     const { key } = e;
-    if (key === "ArrowDown") {
+    if (key === KEY_CONFIG.ARROW_DOWN) {
       e.preventDefault();
       setSelectedIndex((prevIndex: number) =>
         prevIndex < suggestions.length - 1 ? prevIndex + 1 : 0
       );
-    } else if (key === "ArrowUp") {
+    } else if (key === KEY_CONFIG.ARROW_UP) {
       e.preventDefault();
       setSelectedIndex((prevIndex: number) =>
         prevIndex > 0 ? prevIndex - 1 : suggestions.length - 1
       );
-    } else if (key === "Enter" && selectedIndex !== -1) {
+    } else if (key === KEY_CONFIG.ENTER && selectedIndex !== -1) {
       onStockClick(suggestions[selectedIndex]);
     }
   };
@@ -55,7 +62,7 @@ const SuggestionsList = ({
             <AutocompleteListItemSkeleton key={index} />
           ))}
         </AutocompleteList>
-      ) : suggestions && suggestions.length ? (
+      ) : suggestions && suggestions.length > 0 ? (
         <AutocompleteList>
           {suggestions.map((stock, index) => {
             return (
@@ -76,11 +83,13 @@ const SuggestionsList = ({
           })}
         </AutocompleteList>
       ) : (
-        <AutocompleteList>
-          <AutocompleteListItem>
-            {EmptyComponent ? <EmptyComponent /> : "Stock Not Found! 😿"}
-          </AutocompleteListItem>
-        </AutocompleteList>
+        isLoading ? null : (
+          <AutocompleteList>
+            <AutocompleteListItem>
+              {EmptyComponent ? <EmptyComponent /> : "Stock Not Found! 😿"}
+            </AutocompleteListItem>
+          </AutocompleteList>
+        )
       )}
     </>
   );

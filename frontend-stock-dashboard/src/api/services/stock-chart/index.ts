@@ -5,6 +5,7 @@ import {
   } from "../../reducer/stock-reducers/stock-chart/types";
 import { getStockChartDetail } from "../../endpoints";
   
+  let isLoading = false;
   const queryCacheRecord = await cachedApiCall();
   
   const fetchStockChart = async (
@@ -12,11 +13,12 @@ import { getStockChartDetail } from "../../endpoints";
     dispatch: React.Dispatch<FetchChartAction>,
     cacheTime?: number
   ) => {
-    if (!symbol) {
+    if (!symbol || isLoading) {
       return;
     }
   
     try {
+      isLoading = true;
       dispatch({ type: FetchChartActionTypes.FETCH_START });
       // const response = await queryCacheRecord(getStockChartDetail(symbol), {}, cacheTime);
       const response = await queryCacheRecord(
@@ -30,6 +32,8 @@ import { getStockChartDetail } from "../../endpoints";
       });
     } catch (error) {
       dispatch({ type: FetchChartActionTypes.FETCH_ERROR, payload: error });
+    } finally {
+      isLoading = false;
     }
   };
   

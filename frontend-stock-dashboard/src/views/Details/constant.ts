@@ -51,3 +51,4 @@ export const initialState: StockDetailState = {
   error: false,
 };
 
+export const CLEAR = "clear";

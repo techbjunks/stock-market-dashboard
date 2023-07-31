@@ -2,13 +2,14 @@ import Chart from '../StockChart';
 import theme from "../../../../theme";
 import { useMobile } from "../../../../hooks";
 import { getStockPrice } from "../../../../utils";
+import { InfoContainer, RowItem } from "./styled";
 import Title from "../../../../common/components/Title";
 import { StockTableProps, InfoItemType } from "./types";
+import SkeletonLoader from './components/SkeletonLoader';
 import Text from "../../../../common/components/Text/Text";
 import FlexBox from "../../../../common/components/Box/Flex/Flex";
-import { InfoContainer, RowItem, SkeletonItem } from "./styled";
 
-const InfoItem = ({ title, value, color }: InfoItemType): JSX.Element => (
+const InfoItem = ({ title, value = '', color }: InfoItemType): JSX.Element => (
   <RowItem>
     <Text fontSize={theme.typography.label.fontSize} weight="200" color={color}>
       {title.length ? `${title} -` : null} {value}
@@ -16,32 +17,10 @@ const InfoItem = ({ title, value, color }: InfoItemType): JSX.Element => (
   </RowItem>
 );
 
-const SkeletonLoader = () => (
-  <FlexBox gap="40px" flexDirection="row">
-    <InfoContainer>
-      <Title as="h4" size="medium" color="#2a2e39">
-        Latest Quote - <SkeletonItem width="100px" />
-        <SkeletonItem width="80px" />
-      </Title>
-      <SkeletonItem width="100%" height="16px" />
-      <SkeletonItem width="100%" height="16px" />
-      <SkeletonItem width="100%" height="16px" />
-      <SkeletonItem width="100%" height="16px" />
-      <SkeletonItem width="100%" height="16px" />
-      <SkeletonItem width="100%" height="16px" />
-    </InfoContainer>
-    <InfoContainer>
-      <Title as="h4" size="medium" color="#2a2e39">
-        Chart
-      </Title>
-    </InfoContainer>
-  </FlexBox>
-);
-
 const StockTable = ({ data, isLoading }: StockTableProps): JSX.Element => {
   const isMobile = useMobile(768);
 
-  if (isLoading) {
+  if (isLoading || (Object.keys(data).length <= 1)) {
     return <SkeletonLoader />;
   }
 
@@ -51,21 +30,21 @@ const StockTable = ({ data, isLoading }: StockTableProps): JSX.Element => {
       flexDirection={isMobile ? "column" : "row"}
     >
       <InfoContainer>
-        <Title as="h4" size="medium" color="#2a2e39">
-          Latest Quote - {data.Name} {data.Symbol} {data.Country}
+        <Title as="h4" size="medium" color={theme.typography.heading.color}>
+          Latest Quote {data.Name} {data.Symbol} {data.Country}
         </Title>
-        <InfoItem title="" value={data.Description} color="#2a2e39" />
+        <InfoItem title="" value={data.Description} color={theme.typography.heading.color} />
         <InfoItem
           title="Stock Price"
-          value={getStockPrice(data.EPS, data.PERatio, data.Currency)}
-          color="#5f12c7"
+          color={theme.typography.highlight.color}
+          value={getStockPrice(data.EPS, data.PERatio, data.Currency) ?? ''}
         />
-        <InfoItem title="PE Ratio" value={data.PERatio} color="#5f12c7" />
-        <InfoItem title="Exchange" value={data.Exchange} color="#5f12c7" />
-        <InfoItem title="Industry" value={data.Industry} color="#5f12c7" />
+        <InfoItem title="PE Ratio" value={data.PERatio} color={theme.typography.highlight.color} />
+        <InfoItem title="Exchange" value={data.Exchange} color={theme.typography.highlight.color} />
+        <InfoItem title="Industry" value={data.Industry} color={theme.typography.highlight.color} />
         <InfoItem
           title="Market Cap"
-          color="#5f12c7"
+          color={theme.typography.highlight.color}
           value={`${data.MarketCapitalization} ${data.Currency}`}
         />
       </InfoContainer>
