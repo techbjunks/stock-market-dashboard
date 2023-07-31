@@ -5,8 +5,8 @@ import {
   } from "../../reducer/stock-reducers/stock-chart/types";
 import { getStockChartDetail } from "../../endpoints";
   
-  const queryCacheRecord = await cachedApiCall();
   let isLoading = false;
+  const queryCacheRecord = await cachedApiCall();
   
   const fetchStockChart = async (
     symbol: string | undefined,
@@ -20,12 +20,12 @@ import { getStockChartDetail } from "../../endpoints";
     try {
       isLoading = true;
       dispatch({ type: FetchChartActionTypes.FETCH_START });
-      const response = await queryCacheRecord(getStockChartDetail(symbol), {}, cacheTime);
-      // const response = await queryCacheRecord(
-      //   "https://run.mocky.io/v3/103b3b9d-87af-4aaa-b750-f971f911ed4a",
-      //   {},
-      //   cacheTime
-      // );
+      // const response = await queryCacheRecord(getStockChartDetail(symbol), {}, cacheTime);
+      const response = await queryCacheRecord(
+        "https://run.mocky.io/v3/103b3b9d-87af-4aaa-b750-f971f911ed4a",
+        {},
+        cacheTime
+      );
       dispatch({
         type: FetchChartActionTypes.FETCH_SUCCESS,
         payload: response,
