@@ -14,10 +14,7 @@ const StockChart = ({ symbol, stockName }: StockChartType) => {
   const [{ data, loading }, dispatch] = useReducer(fetchChartReducer, initialState);
 
   useEffect(() => {
-    const getStockChartData = async () => {
-      await fetchStockChart(symbol, dispatch, 3600000);
-    }
-    getStockChartData();
+    fetchStockChart(symbol, dispatch, 3600000);
   }, [symbol]);
   return (
     <>

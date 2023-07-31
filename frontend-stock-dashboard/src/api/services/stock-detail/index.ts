@@ -18,12 +18,12 @@ const fetchStockDetail = async (
 
   try {
     dispatch({ type: StockDetailActionTypes.FETCH_START });
-    // const response = await queryCacheRecord(getStockDetail(symbol), {}, cacheTime);
-    const response = await queryCacheRecord(
-      "https://run.mocky.io/v3/22c30f53-6537-4e10-86f0-47c3fe26b29c",
-      {},
-      cacheTime
-    );
+    const response = await queryCacheRecord(getStockDetail(symbol), {}, cacheTime);
+    // const response = await queryCacheRecord(
+    //   "https://run.mocky.io/v3/22c30f53-6537-4e10-86f0-47c3fe26b29c",
+    //   {},
+    //   cacheTime
+    // );
     dispatch({
       type: StockDetailActionTypes.FETCH_SUCCESS,
       payload: response,
