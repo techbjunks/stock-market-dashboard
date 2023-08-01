@@ -36,6 +36,7 @@
             controller.abort();
     - WebSockets and Server-Sent Events (SSE) are preferred for real-time updates, as they provide more efficient and scalable ways to  deliver data to clients without the need for constant polling.
     - Documentation can be better , we can add each component small documentation or automate it
+    - Design should be coming from a seperate repository
     - Components can be improved
          In Button - variants , size such features can be added
     - API dosent have a standard JSON response , we can create some helpers to resolve it 
@@ -55,4 +56,8 @@
     - API_KEY should not be kept on client side espicially prod keys. Bad Practise
     - Story-book for common components 
     - We can assess chart component , if the chart component computation is expensive 
-        - we can useMemo , to memoize the component if the data for revaluation dosent change 
+        - we can useMemo , to memoize the component if the data for revaluation dosent change
+    - Accessibility Score , we can use WAVE and certain tools to check for accessibility validation
+    - Automation , we can use github workflows in the project
+        - ESlint configuration on the workflow , safety checks like variable declarations etc
+        - Create a docker setup for UI verification , we can use tools like devstack 

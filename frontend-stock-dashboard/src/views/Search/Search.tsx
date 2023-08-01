@@ -78,6 +78,7 @@ const Search = () => {
       <FlexContainer alignItems="center">
         <TextInput
           autoFocus
+          name="search-bar"
           style={InputStyle}
           value={searchQuery}
           onSubmit={onSubmit}
