@@ -62,3 +62,6 @@
         - ESlint configuration on the workflow , safety checks like variable declarations etc
         - Create a docker setup for UI verification , we can use tools like devstack
     - Vernacuarizations / language localization can be a good use case for stock excahnge
+            - Currency
+            - Language
+    - Humanization for values like especially Amount
