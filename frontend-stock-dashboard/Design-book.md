@@ -11,3 +11,5 @@
     Complexity: Canvas is more suitable for custom, pixel-level rendering. If your chart requires custom visualizations or complex rendering, canvas can be a good choice.
 
     Chart Types: Canvas is particularly useful for rendering chart types like heatmaps, real-time charts, and pixel-perfect custom visuals.
+
+    Detailed Comparison - https://docs.google.com/document/d/1d0b9xC_oo1Ssd7cqr91RfcYs0SF7wDqL5LZfsxN4EGk/edit
