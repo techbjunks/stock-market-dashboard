@@ -10,7 +10,6 @@ const LineChart = ({
   labelPosition = "top",
 }: LineChartProps) => {
   const [data, setData] = useState(INITIAL_DATA);
-
   useEffect(() => {
     const updateChart = () => {
       if (!chartData || !chartData["Time Series (Daily)"]) {

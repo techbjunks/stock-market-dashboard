@@ -1,24 +1,24 @@
 export enum LABEL_POSITION {
-    TOP = 'top',
-    BOTTOM = 'bottom',
+  TOP = "top",
+  BOTTOM = "bottom",
 }
 
 export interface TextInputProps {
-    name?: string,
-    type?: string,
-    value: string,
-    label?: string,
-    suffix?: string,
-    prefix?: string,
-    autoFocus?: boolean,
-    onBlur?: () => void,
-    placeholder?: string,
-    validationMessage?: string,
-    onFocus?: () => React.FocusEvent,
-    containerStyle?: React.CSSProperties | undefined;
-    style?: React.CSSProperties | undefined;
-    labelPosition?: LABEL_POSITION.TOP | LABEL_POSITION.BOTTOM,
-    onSubmit?: (e:   React.KeyboardEvent<HTMLInputElement>) => void,
-    onChange: (e: React.ChangeEvent<HTMLInputElement>) => void,
-} 
- 
+  name: string;
+  type?: string;
+  value: string;
+  label?: string;
+  suffix?: string;
+  prefix?: string;
+  testId?: string;
+  autoFocus?: boolean;
+  onBlur?: () => void;
+  placeholder?: string;
+  validationMessage?: string;
+  onFocus?: () => React.FocusEvent;
+  style?: React.CSSProperties | undefined;
+  containerStyle?: React.CSSProperties | undefined;
+  labelPosition?: LABEL_POSITION.TOP | LABEL_POSITION.BOTTOM;
+  onSubmit?: (e: React.KeyboardEvent<HTMLInputElement>) => void;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+}

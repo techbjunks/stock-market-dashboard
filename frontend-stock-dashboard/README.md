@@ -20,6 +20,7 @@ cd vite-stock-project
 Install dependencies:
 
 npm install / yarn install
+
 Run the development server:
 
 npm run dev / yarn run dev
@@ -56,6 +57,6 @@ This project is open-source and available under the MIT License. Feel free to us
 
 Feel free to customize this README according to your project's specific details and requirements. The README should provide clear instructions for running the project, list any dependencies used, and give credit to the original creator. Additionally, you can include information about how to contribute or report issues if the project is intended for collaborative development.
 
-User
+Frontend Stack
 # React + TypeScript + Vite
 

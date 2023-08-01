@@ -12,6 +12,7 @@ const TextInput = ({
   onChange,
   onSubmit,
   autoFocus,
+  testId,
   placeholder,
   labelPosition,
   containerStyle,
@@ -24,8 +25,8 @@ const TextInput = ({
   };
 
   const handleKeyUp = (event: React.KeyboardEvent<HTMLInputElement>) => {
-    if (event.key === 'Enter' && onSubmit) {
-      onSubmit(event);
+    if (event.key === 'Enter') {
+      onSubmit?.(event);
     }
   };
   return (
@@ -40,6 +41,7 @@ const TextInput = ({
           style={style}
           onBlur={onBlur}
           onFocus={onFocus}
+          data-testId={testId ?? name}
           onKeyUp={handleKeyUp}
           autoFocus={autoFocus}
           onChange={handleChange}

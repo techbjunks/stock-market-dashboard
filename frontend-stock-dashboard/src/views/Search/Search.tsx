@@ -3,6 +3,7 @@ import { useState, useReducer, useEffect, useRef, useTransition } from "react";
 
 import { useDebounce } from "../../hooks";
 import { fetchSuggestions } from "../../api";
+import { EmptyComponentProps } from "./types";
 import { Stock } from "../../common/types/stock";
 import SuggestionList from "./components/Suggestions";
 import { isStockValid, initialState } from "./constant";
@@ -10,16 +11,12 @@ import useClickOutside from "../../hooks/useClickOutside";
 import Button from "../../common/components/Button/Button";
 import FlexContainer from "../../common/components/Box/Flex";
 import { Container, InputStyle, InputWrapper } from "./styled";
-import { autocompleteReducer } from "../../api/reducer/stock-reducers/stocks-suggestions";
 import TextInput from "../../common/components/Input/TextInput/TextInput";
+import { autocompleteReducer } from "../../api/reducer/stock-reducers/stocks-suggestions";
 
-interface EmptyComponentProps {
-  query: string
-}
-
-const EmptyComponent = ({query}:EmptyComponentProps):React.ReactNode => {
-  return <div>{query.toUpperCase()} Stock Not Found! 😿</div>
-}
+const EmptyComponent = ({ query }: EmptyComponentProps): React.ReactNode => {
+  return <div>{query.toUpperCase()} Stock Not Found! 😿</div>;
+};
 
 const Search = () => {
   const ref = useRef(null);
@@ -46,7 +43,7 @@ const Search = () => {
       setAutocompleteOpen(true);
       debouncedSearchQuery(searchQuery, dispatch);
     }
-  }
+  };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
     setSearchQuery(e.target.value);
@@ -58,8 +55,8 @@ const Search = () => {
   const onSubmit = () => {
     if (isSearchQueryValid) {
       setAutocompleteOpen(true);
-      fetchSuggestions(searchQuery, dispatch)
-    } 
+      fetchSuggestions(searchQuery, dispatch);
+    }
   };
 
   const handleOutsideClick = () => {
@@ -73,8 +70,6 @@ const Search = () => {
     navigate(`/stock/${stockSymbol}/details`);
     setAutocompleteOpen(false);
   };
-
-  
 
   useClickOutside(ref, handleOutsideClick);
 

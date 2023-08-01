@@ -28,8 +28,6 @@ const Home = () => {
     return () => {
       clearInterval(intervalTimer);
       intervalTimer = null;
-      const controller = new AbortController();
-      controller.abort();
     };
   }, [symbol]);
 
