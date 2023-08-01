@@ -1,6 +1,6 @@
 import Header from "../Header";
+import { useMobile } from "../../hooks";
 import { StockTable } from "./components";
-import { FilterContainer } from "./styled";
 import { fetchStockDetail } from "../../api";
 import { useParams } from "react-router-dom";
 import { useEffect, useReducer } from "react";
@@ -10,6 +10,7 @@ import FlexBox from "../../common/components/Box/Flex";
 import ErrorBoundary from "../../common/ui/ErrorBoundary";
 import ErrorComponent from "../../common/ui/ErrorContainer";
 import useRouteNavigation from "../../hooks/useRouteNavigation";
+import { FilterContainer, NavigationContainer } from "./styled";
 import SelectComponent from "../../common/components/Select/Select";
 import fetchStockDetailReducer from "../../api/reducer/stock-reducers/stock-detail";
 
@@ -17,6 +18,7 @@ let intervalTimer: number | null | undefined = null;
 
 const Home = () => {
   const { symbol } = useParams();
+  const isMobile = useMobile(768);
   const { previousRoute, forwardRoute } = useRouteNavigation();
   const [{ data, loading, error }, dispatch] = useReducer(
     fetchStockDetailReducer,
@@ -28,8 +30,6 @@ const Home = () => {
     return () => {
       clearInterval(intervalTimer);
       intervalTimer = null;
-      const controller = new AbortController();
-      controller.abort();
     };
   }, [symbol]);
 
@@ -76,10 +76,12 @@ const Home = () => {
               onChange={updateAPIInterval}
             />
             <StockTable isLoading={loading} data={data} key={data.Symbol} />
-            <FlexBox gap="40px">
-              <Button onClick={previousRoute}>Back</Button>
-              <Button onClick={forwardRoute}>Next</Button>
-            </FlexBox>
+            <NavigationContainer>
+              <FlexBox gap="40px">
+                <Button width={isMobile ? 'Full': ''} onClick={previousRoute}>Back</Button>
+                <Button width={isMobile ? 'Full': ''} onClick={forwardRoute}>Next</Button>
+              </FlexBox>
+            </NavigationContainer>
           </>
         )}
       </FilterContainer>
@@ -88,3 +90,5 @@ const Home = () => {
 };
 
 export default Home;
+
+// width

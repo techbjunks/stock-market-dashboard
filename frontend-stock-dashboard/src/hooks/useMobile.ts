@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback } from "react";
 
-const useMobile = (breakpoint: number): boolean => {
+const useMobile = (breakpoint?: number | undefined): boolean => {
   const [isMobile, setIsMobile] = useState(false);
 
   const handleResize = useCallback(() => {

@@ -3,6 +3,7 @@ import { useState, useReducer, useEffect, useRef, useTransition } from "react";
 
 import { useDebounce } from "../../hooks";
 import { fetchSuggestions } from "../../api";
+import { EmptyComponentProps } from "./types";
 import { Stock } from "../../common/types/stock";
 import SuggestionList from "./components/Suggestions";
 import { isStockValid, initialState } from "./constant";
@@ -10,8 +11,12 @@ import useClickOutside from "../../hooks/useClickOutside";
 import Button from "../../common/components/Button/Button";
 import FlexContainer from "../../common/components/Box/Flex";
 import { Container, InputStyle, InputWrapper } from "./styled";
-import { autocompleteReducer } from "../../api/reducer/stock-reducers/stocks-suggestions";
 import TextInput from "../../common/components/Input/TextInput/TextInput";
+import { autocompleteReducer } from "../../api/reducer/stock-reducers/stocks-suggestions";
+
+const EmptyComponent = ({ query }: EmptyComponentProps): React.ReactNode => {
+  return <div>{query.toUpperCase()} Stock Not Found! 😿</div>;
+};
 
 const Search = () => {
   const ref = useRef(null);
@@ -38,7 +43,7 @@ const Search = () => {
       setAutocompleteOpen(true);
       debouncedSearchQuery(searchQuery, dispatch);
     }
-  }
+  };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
     setSearchQuery(e.target.value);
@@ -48,7 +53,10 @@ const Search = () => {
   };
 
   const onSubmit = () => {
-    valiateAndQueryResults();
+    if (isSearchQueryValid) {
+      setAutocompleteOpen(true);
+      fetchSuggestions(searchQuery, dispatch);
+    }
   };
 
   const handleOutsideClick = () => {
@@ -66,32 +74,31 @@ const Search = () => {
   useClickOutside(ref, handleOutsideClick);
 
   return (
-      <Container ref={ref}>
-        <FlexContainer alignItems="center">
-          <TextInput
-            autoFocus
-            style={InputStyle}
-            value={searchQuery}
-            onSubmit={onSubmit}
-            onChange={handleChange}
-            containerStyle={InputWrapper}
-            placeholder="Please enter your stock symbol"
-          />
-          <Button type="submit" onClick={onSubmit}>
-            Search
-          </Button>
-        </FlexContainer>
+    <Container ref={ref}>
+      <FlexContainer alignItems="center">
+        <TextInput
+          autoFocus
+          name="search-bar"
+          style={InputStyle}
+          value={searchQuery}
+          onSubmit={onSubmit}
+          onChange={handleChange}
+          containerStyle={InputWrapper}
+          placeholder="Please enter your stock symbol"
+        />
+        <Button type="submit" onClick={onSubmit}>
+          Search
+        </Button>
+      </FlexContainer>
 
-        {isSuggestionVisible && (
-          <SuggestionList
-            response={state}
-            onSuggestionClickCb={handleSelectedItem}
-            EmptyComponent={() => (
-              <div>{searchQuery.toUpperCase()} Stock Not Found! 😿</div>
-            )}
-          />
-        )}
-      </Container>
+      {isSuggestionVisible && (
+        <SuggestionList
+          response={state}
+          onSuggestionClickCb={handleSelectedItem}
+          EmptyComponent={<EmptyComponent query={searchQuery} />}
+        />
+      )}
+    </Container>
   );
 };
 
