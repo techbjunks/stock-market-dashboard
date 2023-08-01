@@ -60,4 +60,5 @@
     - Accessibility Score , we can use WAVE and certain tools to check for accessibility validation
     - Automation , we can use github workflows in the project
         - ESlint configuration on the workflow , safety checks like variable declarations etc
-        - Create a docker setup for UI verification , we can use tools like devstack 
+        - Create a docker setup for UI verification , we can use tools like devstack
+    - Vernacuarizations / language localization can be a good use case for stock excahnge
