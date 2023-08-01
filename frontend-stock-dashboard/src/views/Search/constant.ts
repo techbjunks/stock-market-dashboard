@@ -3,7 +3,7 @@ import { AutocompleteState } from "../../api/reducer/stock-reducers/stocks-sugge
 export const isStockValid: number = 2;
 
 export const initialState: AutocompleteState = {
-  loading: false,
+  loading: true,
   suggestions: [],
   error: null,
 };

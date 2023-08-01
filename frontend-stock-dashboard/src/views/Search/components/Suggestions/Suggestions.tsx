@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, isValidElement } from "react";
 import { SuggestionPropsType } from "./types";
 import {
   AutocompleteList,
@@ -83,10 +83,10 @@ const SuggestionsList = ({
           })}
         </AutocompleteList>
       ) : (
-        isLoading ? null : (
+        !isLoading && suggestions.length === 0  && (
           <AutocompleteList>
             <AutocompleteListItem>
-              {EmptyComponent ? <EmptyComponent /> : "Stock Not Found! 😿"}
+              {isValidElement(EmptyComponent) ? EmptyComponent : "Stock Not Found! 😿"}
             </AutocompleteListItem>
           </AutocompleteList>
         )

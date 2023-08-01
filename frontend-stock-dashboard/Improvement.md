@@ -21,6 +21,7 @@
             data
         }
     }
+2. Ideally for such scenarios web socket should be used where we have to frequently update the data.
 2. Central Level Error Monitoring
     Sentry/bugsnag for Error Monitoring, we can use ErrorBoundary for sending the events.
 3. JS Code Splitting / Bundle creation

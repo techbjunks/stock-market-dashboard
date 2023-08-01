@@ -4,6 +4,6 @@ import { Stock } from "../../../../common/types/stock";
 
 export type SuggestionPropsType = {
   response: AutocompleteState;
-  EmptyComponent?: () => JSX.Element;
+  EmptyComponent?: React.ReactNode;
   onSuggestionClickCb: (stock: Stock) => void;
 };

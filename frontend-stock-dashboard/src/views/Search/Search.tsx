@@ -13,6 +13,14 @@ import { Container, InputStyle, InputWrapper } from "./styled";
 import { autocompleteReducer } from "../../api/reducer/stock-reducers/stocks-suggestions";
 import TextInput from "../../common/components/Input/TextInput/TextInput";
 
+interface EmptyComponentProps {
+  query: string
+}
+
+const EmptyComponent = ({query}:EmptyComponentProps):React.ReactNode => {
+  return <div>{query.toUpperCase()} Stock Not Found! 😿</div>
+}
+
 const Search = () => {
   const ref = useRef(null);
   const navigate = useNavigate();
@@ -48,7 +56,10 @@ const Search = () => {
   };
 
   const onSubmit = () => {
-    valiateAndQueryResults();
+    if (isSearchQueryValid) {
+      setAutocompleteOpen(true);
+      fetchSuggestions(searchQuery, dispatch)
+    } 
   };
 
   const handleOutsideClick = () => {
@@ -63,35 +74,35 @@ const Search = () => {
     setAutocompleteOpen(false);
   };
 
+  
+
   useClickOutside(ref, handleOutsideClick);
 
   return (
-      <Container ref={ref}>
-        <FlexContainer alignItems="center">
-          <TextInput
-            autoFocus
-            style={InputStyle}
-            value={searchQuery}
-            onSubmit={onSubmit}
-            onChange={handleChange}
-            containerStyle={InputWrapper}
-            placeholder="Please enter your stock symbol"
-          />
-          <Button type="submit" onClick={onSubmit}>
-            Search
-          </Button>
-        </FlexContainer>
+    <Container ref={ref}>
+      <FlexContainer alignItems="center">
+        <TextInput
+          autoFocus
+          style={InputStyle}
+          value={searchQuery}
+          onSubmit={onSubmit}
+          onChange={handleChange}
+          containerStyle={InputWrapper}
+          placeholder="Please enter your stock symbol"
+        />
+        <Button type="submit" onClick={onSubmit}>
+          Search
+        </Button>
+      </FlexContainer>
 
-        {isSuggestionVisible && (
-          <SuggestionList
-            response={state}
-            onSuggestionClickCb={handleSelectedItem}
-            EmptyComponent={() => (
-              <div>{searchQuery.toUpperCase()} Stock Not Found! 😿</div>
-            )}
-          />
-        )}
-      </Container>
+      {isSuggestionVisible && (
+        <SuggestionList
+          response={state}
+          onSuggestionClickCb={handleSelectedItem}
+          EmptyComponent={<EmptyComponent query={searchQuery} />}
+        />
+      )}
+    </Container>
   );
 };
 
