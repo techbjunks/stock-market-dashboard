@@ -65,3 +65,5 @@
             - Currency
             - Language
     - Humanization for values like especially Amount
+    - Build Process
+        - Two builds brotli & Gzip

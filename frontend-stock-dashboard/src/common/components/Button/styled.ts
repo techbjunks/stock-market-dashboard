@@ -1,5 +1,11 @@
 import styled, { css } from "styled-components";
 
+interface ButtonProps {
+  width?: string;
+  height?: number;
+  variant: 'primary' | 'secondary';
+}
+
 const primaryStyles = css`
   background-color: #007bff;
   color: #fff;
@@ -26,8 +32,8 @@ const secondaryStyles = css`
   }
 `;
 
-export const StyledButton = styled.button`
-  width: 150px;
+export const StyledButton = styled.button<ButtonProps>`
+  width: ${(props) => (props.width === 'Full' ? '100%' : '150px')};
   height: 45px;
   border: none;
   cursor: pointer;
