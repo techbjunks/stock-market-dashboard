@@ -1,0 +1,69 @@
+{
+    "budgets": [
+      {
+        "name": "First Meaningful Paint",
+        "budget": 1000,
+        "unit": "ms"
+      },
+      {
+        "name": "Speed Index",
+        "budget": 3000,
+        "unit": "ms"
+      },
+      {
+        "name": "Total Blocking Time",
+        "budget": 500,
+        "unit": "ms"
+      },
+      {
+        "name": "Largest Contentful Paint",
+        "budget": 2000,
+        "unit": "ms"
+      },
+      {
+        "name": "Cumulative Layout Shift",
+        "budget": 0.1,
+        "unit": "%"
+      },
+      {
+        "name": "Resource Sizes",
+        "budgets": [
+          {
+            "name": "Images",
+            "budget": 100,
+            "unit": "KiB"
+          },
+          {
+            "name": "Scripts",
+            "budget": 50,
+            "unit": "KiB"
+          },
+          {
+            "name": "CSS",
+            "budget": 25,
+            "unit": "KiB"
+          },
+          {
+            "name": "Fonts",
+            "budget": 10,
+            "unit": "KiB"
+          }
+        ]
+      },
+      {
+        "name": "Resource Counts",
+        "budgets": [
+          {
+            "name": "Third-Party Requests",
+            "budget": 10,
+            "unit": "requests"
+          },
+          {
+            "name": "Total Requests",
+            "budget": 20,
+            "unit": "requests"
+          }
+        ]
+      }
+    ]
+  }
