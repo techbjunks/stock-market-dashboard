@@ -70,4 +70,4 @@
         - Two builds brotli & Gzip (Serve modern code to modern browsers for faster page loads)
     - If more components are there we can introduce lazy loading.
     - Preload imp resource , Render Initial Routes , Precache Remaining assets (service worker for next reload) , Lazy load Other Routes
-    - DNS Preconnect , Preload , Prefetch , Push Notification from server side
+    - DNS Preconnect , Preload , Prefetch , Push Notification from server side if HTTP2 connection , QUIC UDP protocol can be useful however in nascent stage
