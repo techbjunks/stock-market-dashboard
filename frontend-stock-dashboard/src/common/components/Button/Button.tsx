@@ -16,6 +16,7 @@ const Button = ({
       variant={variant}
       onClick={onClick}
       aria-label={ariaLabel}
+      role={type}
     >
       {children}
     </StyledButton>

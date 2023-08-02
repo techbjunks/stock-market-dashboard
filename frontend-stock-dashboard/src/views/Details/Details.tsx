@@ -1,10 +1,13 @@
 import Header from "../Header";
+import Route from '../../routes';
 import { useMobile } from "../../hooks";
 import { StockTable } from "./components";
+import { isValidSymbol } from "../../utils";
 import { fetchStockDetail } from "../../api";
 import { useParams } from "react-router-dom";
 import { useEffect, useReducer } from "react";
 import { initialState, CLEAR } from "./constant";
+import { useNavigate } from 'react-router-dom';
 import Button from "../../common/components/Button";
 import FlexBox from "../../common/components/Box/Flex";
 import ErrorBoundary from "../../common/ui/ErrorBoundary";
@@ -19,6 +22,7 @@ let intervalTimer: number | null | undefined = null;
 const Home = () => {
   const { symbol } = useParams();
   const isMobile = useMobile(768);
+  const navigate = useNavigate();
   const { previousRoute, forwardRoute } = useRouteNavigation();
   const [{ data, loading, error }, dispatch] = useReducer(
     fetchStockDetailReducer,
@@ -26,12 +30,15 @@ const Home = () => {
   );
   
   useEffect(() => {
+    if(!isValidSymbol(symbol)){
+      navigate(Route.HOME);
+    }
     fetchStockDetail(symbol, dispatch);
     return () => {
       clearInterval(intervalTimer);
       intervalTimer = null;
     };
-  }, [symbol]);
+  }, [symbol, navigate]);
 
   const updateAPIInterval = (value: string | []): void => {
     if (value === CLEAR) {
@@ -90,5 +97,3 @@ const Home = () => {
 };
 
 export default Home;
-
-// width

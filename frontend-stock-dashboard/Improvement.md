@@ -23,7 +23,8 @@
         }
     - Ideally for such scenarios web socket should be used where we have to frequently update the data.
     - Central Level Error Monitoring
-        Sentry/bugsnag for Error Monitoring, we can use ErrorBoundary for sending the events.
+        - Sentry/bugsnag for Error Monitoring, we can use ErrorBoundary for sending the error events. P95, P97 etc
+        - Canary Analysis Mechanism can be used with the help of this , active traffic re routing
     - JS Code Splitting / Bundle creation
     - E2E Test Suite / Snapshot testing can be incorporated.
     - ESLint configuration for standard code delivery
@@ -66,4 +67,7 @@
             - Language
     - Humanization for values like especially Amount
     - Build Process
-        - Two builds brotli & Gzip
+        - Two builds brotli & Gzip (Serve modern code to modern browsers for faster page loads)
+    - If more components are there we can introduce lazy loading.
+    - Preload imp resource , Render Initial Routes , Precache Remaining assets (service worker for next reload) , Lazy load Other Routes
+    - DNS Preconnect , Preload , Prefetch , Push Notification from server side
