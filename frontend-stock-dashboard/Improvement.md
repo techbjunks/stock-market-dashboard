@@ -26,16 +26,19 @@
         - Sentry/bugsnag for Error Monitoring, we can use ErrorBoundary for sending the error events. P95, P97 etc
         - Canary Analysis Mechanism can be used with the help of this , active traffic re routing
     - JS Code Splitting / Bundle creation
+    - Relative path across project , we can use alias for that
     - E2E Test Suite / Snapshot testing can be incorporated.
         - E2E we can consider Playwright or Pupeteer
     - ESLint configuration for standard code delivery
     - Lighthouse Performance check
     - Interceptor at root level
+        - common error case can be handled here like Note , API reached Maximum Limit
         - common case like uniqueId for each request can be added there and each request should go via interceptor.
         - controllers should be added in case of unmount API call should not be there
             const controller = new AbortController();
             const {signal} = controller;
             controller.abort();
+        - Retry Mechanism / Circuit Breaker Logic as well can be added.
     - WebSockets and Server-Sent Events (SSE) are preferred for real-time updates, as they provide more efficient and scalable ways to  deliver data to clients without the need for constant polling.
     - Documentation can be better , we can add each component small documentation or automate it
     - Design should be coming from a seperate repository
