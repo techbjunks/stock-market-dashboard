@@ -8,15 +8,17 @@ const Button = ({
   width,
   onClick = () => {},
   variant = "primary",
+  isDisabled = false,
 }: ButtonProps): JSX.Element => {
   return (
     <StyledButton
       type={type}
       width={width}
+      role={type}
       variant={variant}
       onClick={onClick}
       aria-label={ariaLabel}
-      role={type}
+      isDisabled={isDisabled}
     >
       {children}
     </StyledButton>

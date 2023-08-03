@@ -1,29 +1,21 @@
-import React from 'react';
 import Path from './routes'
+import { Suspense, lazy } from 'react';
 import {  BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import NotFound from './common/ui/NotFound';
 
-const Home = React.lazy(() => import("./views/Home"));
-const Details = React.lazy(() => import("./views/Details"));
+const Home = lazy(() => import("./views/Home"));
+const Details = lazy(() => import("./views/Details"));
 
 const Base = ():JSX.Element => {
   return (
     <Router>
-      <div>
+      <Suspense fallback={<div>Loading...</div>}>
         <Routes>
-          <Route path={Path.HOME} element={
-              <React.Suspense fallback={<>...</>}>
-                <Home />
-              </React.Suspense>
-            } />
-          <Route path={Path.DETAIL} element={
-              <React.Suspense fallback={<>...</>}>
-                <Details />
-              </React.Suspense>
-            } />
+          <Route path={Path.HOME} element={<Home />} />
+          <Route path={Path.DETAIL} element={<Details />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
-      </div>
+      </Suspense>
     </Router>
   )
 }

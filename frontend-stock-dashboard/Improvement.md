@@ -27,6 +27,7 @@
         - Canary Analysis Mechanism can be used with the help of this , active traffic re routing
     - JS Code Splitting / Bundle creation
     - E2E Test Suite / Snapshot testing can be incorporated.
+        - E2E we can consider Playwright or Pupeteer
     - ESLint configuration for standard code delivery
     - Lighthouse Performance check
     - Interceptor at root level
@@ -39,8 +40,12 @@
     - Documentation can be better , we can add each component small documentation or automate it
     - Design should be coming from a seperate repository
     - Components can be improved
-         In Button - variants , size such features can be added
-    - API dosent have a standard JSON response , we can create some helpers to resolve it 
+         Button 
+            - variants , size such features can be added
+            - anchor button for Links and Redirect
+            - icon with iconPosition ('left' | 'right')
+            - size (small | medium | large | xlarge)
+    - API dosent have a standard JSON response , we can create some helpers to resolve it
     - Tokenomics for project can be improved
         - theme
             - color
@@ -72,3 +77,4 @@
     - Preload imp resource , Render Initial Routes , Precache Remaining assets (service worker for next reload) , Lazy load Other Routes
     - DNS Preconnect , Preload , Prefetch , Push Notification from server side if HTTP2 connection , QUIC UDP protocol can be useful however in nascent stage
     - Constant shimmer in Routes for fallback
+    - CDN for images , webP wrapper we might have to write

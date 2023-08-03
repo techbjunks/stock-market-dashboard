@@ -5,4 +5,5 @@ export interface ButtonProps {
   width?: string | undefined;
   children: React.ReactNode;
   type?: "button" | "submit" | "reset" | undefined;
+  isDisabled?: boolean;
 }

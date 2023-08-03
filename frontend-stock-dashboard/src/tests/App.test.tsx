@@ -15,4 +15,5 @@ describe("App component", () => {
     });
     expect(searchBtn).toBeInTheDocument();
   });
+  // TODO - Jest config needs to be done , jest.config.js for Vite project
 });

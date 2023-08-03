@@ -15,6 +15,7 @@ export interface TextInputProps {
   onBlur?: () => void;
   placeholder?: string;
   validationMessage?: string;
+  autocomplete?: 'ON' | 'OFF';
   onFocus?: () => React.FocusEvent;
   style?: React.CSSProperties | undefined;
   containerStyle?: React.CSSProperties | undefined;

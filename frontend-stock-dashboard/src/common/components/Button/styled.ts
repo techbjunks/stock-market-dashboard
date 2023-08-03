@@ -41,4 +41,5 @@ export const StyledButton = styled.button<ButtonProps>`
   border-radius: 6px;
   transition: background-color 0.2s ease;
   ${(props) => (props.variant === "primary" ? primaryStyles : secondaryStyles)};
+  {...props}
 `;

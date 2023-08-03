@@ -1,4 +1,4 @@
-import { TextInputProps, LABEL_POSITION } from './types';
+import { TextInputProps, LABEL_POSITION } from "./types";
 
 const TextInput = ({
   label,
@@ -8,24 +8,24 @@ const TextInput = ({
   onBlur,
   suffix,
   onFocus,
+  testId,
   prefix,
   onChange,
-  onSubmit,
   autoFocus,
-  testId,
+  type = "text",
   placeholder,
   labelPosition,
   containerStyle,
-  type = 'text',
+  autocomplete = "OFF",
+  onSubmit = () => {},
   validationMessage,
 }: TextInputProps): JSX.Element => {
-
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     onChange?.(event);
   };
 
   const handleKeyUp = (event: React.KeyboardEvent<HTMLInputElement>) => {
-    if (event.key === 'Enter') {
+    if (event.key === "Enter") {
       onSubmit?.(event);
     }
   };
@@ -46,6 +46,7 @@ const TextInput = ({
           autoFocus={autoFocus}
           onChange={handleChange}
           placeholder={placeholder}
+          autoComplete={autocomplete}
         />
         {suffix && <span>{suffix}</span>}
         {validationMessage && <label>{validationMessage}</label>}

@@ -1,4 +1,4 @@
-import { render, screen } from "@testing-library/react";
+import { render } from "@testing-library/react";
 import { MemoryRouter } from 'react-router-dom';
 import Details from "../../../views/Details";
 
@@ -7,6 +7,5 @@ describe('Details', () => {
     
     test('should render Details Screen', () => {
         renderApp();
-        screen.debug();
     })
 })
