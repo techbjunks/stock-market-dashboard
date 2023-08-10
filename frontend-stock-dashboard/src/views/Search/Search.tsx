@@ -23,7 +23,7 @@ const Search = () => {
   const navigate = useNavigate();
   const [searchQuery, setSearchQuery] = useState("");
   const [isPending, startTransition] = useTransition();
-  const debouncedSearchQuery = useDebounce(fetchSuggestions, 1500);
+  const debouncedSearchQuery = useDebounce(fetchSuggestions, 1000);
   const [isAutocompleteOpen, setAutocompleteOpen] = useState(false);
   const [state, dispatch] = useReducer(autocompleteReducer, initialState);
 
