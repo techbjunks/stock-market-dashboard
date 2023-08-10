@@ -29,3 +29,7 @@
     5. Painless maintenance: you never have to hunt across different files to find the styling affecting your component, so maintenance is a piece of cake no matter how big your codebase is.
 
     6. Automatic vendor prefixing: write your CSS to the current standard and let styled-components handle the rest.
+
+3. React Testing Library for Unit Testing
+
+    1. 

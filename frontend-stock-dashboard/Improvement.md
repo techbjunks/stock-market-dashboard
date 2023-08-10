@@ -18,7 +18,7 @@
             }
         - stockChart(symbol: $symbol) {
                 labels
-                data
+                data // we can remove un used fields as well , transformation of data as well like stockPrice
             }
         }
     - Ideally for such scenarios web socket should be used where we have to frequently update the data.
@@ -27,6 +27,10 @@
         - Canary Analysis Mechanism can be used with the help of this , active traffic re routing
     - JS Code Splitting / Bundle creation
     - Relative path across project , we can use alias for that
+    - Segregate Search Functionality , list specificaly functionality if more such functionalities are there
+    - Discuss state caching while doing navigation
+        - navigate("/details", { state: { stock_details: "AAPL" } }); 
+        As it is a stock application we need to be careful about the data logic , as it can update very effectively
     - E2E Test Suite / Snapshot testing can be incorporated.
         - E2E we can consider Playwright or Pupeteer
     - ESLint configuration for standard code delivery
@@ -38,7 +42,8 @@
             const controller = new AbortController();
             const {signal} = controller;
             controller.abort();
-        - Retry Mechanism / Circuit Breaker Logic as well can be added.
+        - API Retry Mechanism should be there / Circuit Breaker Logic as well can be added.
+        - we can add common headers here if required.
     - WebSockets and Server-Sent Events (SSE) are preferred for real-time updates, as they provide more efficient and scalable ways to  deliver data to clients without the need for constant polling.
     - Documentation can be better , we can add each component small documentation or automate it
     - Design should be coming from a seperate repository
@@ -48,6 +53,8 @@
             - anchor button for Links and Redirect
             - icon with iconPosition ('left' | 'right')
             - size (small | medium | large | xlarge)
+         Input   
+            - Label in Input for form accessibility , focus Management
     - API dosent have a standard JSON response , we can create some helpers to resolve it
     - Tokenomics for project can be improved
         - theme

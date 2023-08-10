@@ -1,18 +1,16 @@
-import { useState } from 'react';
+import { useRef } from 'react';
 
 const useDebounce = (func: (...args: unknown[]) => void, delay: number):unknown => {
-  const [timer, setTimer] = useState<unknown | null>(null);
+  const timer = useRef(null);
 
   return (...args: unknown[]) => {
-    if (timer) {
-      clearTimeout(timer);
+    if (timer.current) {
+      clearTimeout(timer.current);
     }
 
-    setTimer(
-      setTimeout(() => {
-        func(...args);
-      }, delay)
-    );
+    timer.current = setTimeout(() => {
+      func(...args);
+    }, delay)
   };
 };
 
