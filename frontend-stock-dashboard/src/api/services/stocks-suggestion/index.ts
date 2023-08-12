@@ -12,10 +12,10 @@ const fetchSuggestions = async (
   const sanitizedQuery = query.split(" ").join("");
   try {
     dispatch({ type: AutocompleteActionTypes.FETCH_START });
-    // const response = await fetch(getStockResults(sanitizedQuery), {signal});
-    const response = await fetch(
-      "https://run.mocky.io/v3/04619120-b4c2-4b5f-8f49-8f5b7fe81146"
-    );
+    const response = await fetch(getStockResults(sanitizedQuery), {signal});
+    // const response = await fetch(
+    //   "https://run.mocky.io/v3/04619120-b4c2-4b5f-8f49-8f5b7fe81146"
+    // );
     const data = await response.json();
     dispatch({
       type: AutocompleteActionTypes.FETCH_SUCCESS,
